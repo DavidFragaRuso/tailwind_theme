@@ -49,7 +49,7 @@ function tailtheme_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__( 'Primary', 'tailtheme' ),
+			'menu-1' => esc_html__( 'Primary Menu', 'tailtheme' ),
 		)
 	);
 
@@ -99,6 +99,59 @@ function tailtheme_setup() {
 			'flex-height' => true,
 		)
 	);
+
+		/**
+	 * Add custom font sizes to editor
+	 */
+	add_theme_support('editor-font-sizes', array(
+		array(
+			'name' => __('Small', 'tailtheme'),
+			'shortName' => __('S', 'tailtheme'),
+			'size' => 13,
+			'slug' => 'small'
+		),
+		array(
+			'name' => __('Medium', 'tailtheme'),
+			'shortName' => __('M', 'tailtheme'),
+			'size' => 16,
+			'slug' => 'medium'
+		),
+		array(
+			'name' => __('Large', 'tailtheme'),
+			'shortName' => __('L', 'tailtheme'),
+			'size' => 24,
+			'slug' => 'large'
+		),
+		array(
+			'name' => __('Extra Large', 'tailtheme'),
+			'shortName' => __('XL', 'tailtheme'),
+			'size' => 32,
+			'slug' => 'extra-large'
+		)
+	));
+
+	// Add custom styles to the Gutenberg editor
+    add_action('enqueue_block_editor_assets', function() {
+        wp_add_inline_style('wp-block-library', '
+            :root {
+                --wp--preset--font-size--small: 13px;
+                --wp--preset--font-size--medium: 16px;
+                --wp--preset--font-size--large: 24px;
+                --wp--preset--font-size--extra-large: 32px;
+            }
+        ');
+    });
+
+	/**
+	 * Add support for align wide for gutenberg blocks
+	 */
+	add_theme_support('align-wide');
+
+	/**
+	 * Customize padding on blocks
+	 */
+	add_theme_support('custom-spacing');
+
 }
 add_action( 'after_setup_theme', 'tailtheme_setup' );
 
@@ -127,10 +180,38 @@ function tailtheme_widgets_init() {
 			'description'   => esc_html__( 'Add widgets here.', 'tailtheme' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
+			'before_title'  => '<h3 class="widget-title">',
+			'after_title'   => '</h3>',
 		)
 	);
+	register_sidebar( array(
+		'name'          => esc_html__( 'Footer Col Left', 'tailtheme' ),
+		'id'            => 'sidebar-2',
+		'description'   => esc_html__( 'Add widgets here.', 'tailtheme' ),
+		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
+		) 
+	);
+	register_sidebar( array(
+        'name'          => esc_html__( 'Footer Col Center', 'tailtheme' ),
+        'id'            => 'sidebar-3',
+        'description'   => esc_html__( 'Add widgets here.', 'tailtheme' ),
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</section>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
+	register_sidebar( array(
+        'name'          => esc_html__( 'Footer Col Right', 'tailtheme' ),
+        'id'            => 'sidebar-4',
+        'description'   => esc_html__( 'Add widgets here.', 'tailtheme' ),
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</section>',
+        'before_title'  => '<h3 class="widget-title">',
+        'after_title'   => '</h3>',
+    ) );
 }
 add_action( 'widgets_init', 'tailtheme_widgets_init' );
 
@@ -148,6 +229,7 @@ function tailtheme_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'tailtheme_scripts' );
+
 
 /**
  * Custom template tags for this theme.
