@@ -240,7 +240,6 @@ add_action( 'wp_enqueue_scripts', 'tailtheme_scripts' );
 }
 add_filter( 'upload_mimes', 'allow_svg_upload' );
 
-
 /**
  * Custom template tags for this theme.
  */
@@ -255,11 +254,4 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
-}
 
