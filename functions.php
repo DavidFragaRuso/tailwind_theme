@@ -255,3 +255,8 @@ require get_template_directory() . '/inc/template-functions.php';
  */
 require get_template_directory() . '/inc/customizer.php';
 
+/**
+ * Customize theme options
+ */
+require get_template_directory() . '/inc/theme-options.php';
+$theme_customizer = new Tailwind_Theme_Customizer;
