@@ -1,0 +1,39 @@
+.hero
+    @apply bg-[url('./public/imgs/fondo.svg')] bg-no-repeat bg-[length:350px] md:bg-[length:450px]
+    overflow: hidden
+    .wp-block-media-text__content
+        position: relative
+        overflow: hidden
+        @media screen and (min-width:768px)
+            overflow: initial
+        @media screen and (min-width:1400px)
+            @apply pt-16
+        @media screen and (min-width:1500px)
+            @apply pt-20
+        @media screen and (min-width:1700px)
+            @apply pt-28
+    .wp-block-media-text__content:after
+        content:  url('./public/imgs/mandala.svg')
+        position: absolute
+        bottom: -36%
+        right: -80%
+        z-index: -1
+        @media screen and (min-width:768px)
+            right: -120%
+            bottom: 5%
+        @media screen and (min-width:1024px)
+            right: -115%
+            bottom: -36%
+        @media screen and (min-width:1200px)
+            right: -119%
+            bottom: -6%
+        @media screen and (min-width:1400px)
+            right: -55%
+            bottom: -35%
+        @media screen and (min-width:1600px)
+            right: -30%
+            bottom: -62%
+    figure
+        @apply block !ms-[1.5rem] !me-[1.5rem] !mt-4 overflow-hidden
+        img
+            @apply rounded-lg shadow-md

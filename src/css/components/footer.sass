@@ -1,0 +1,38 @@
+.site-footer
+    @apply bg-[url('./public/imgs/mandala.svg')] bg-no-repeat bg-[right_-12rem_bottom_-10rem]
+    @media screen and (min-width:1400px)
+        @apply bg-[right_16rem_bottom_-9rem]
+.footer-widget
+    @apply w-full md:w-2/4 md:mb-8 lg:w-1/4
+    .footer-site-title
+        @apply font-bold text-lg
+    section
+        div
+            .menu
+                @apply md:block
+                menu-item
+                    @apply pl-0
+                    a
+                        @apply text-secondary
+        p
+            @apply text-sm mb-4
+            a
+                @apply text-secondary
+        ul
+            li
+                a
+                    @apply text-white
+        input
+            @apply block w-full mb-2
+            min-height: 45px
+    .custom-logo-link
+        @apply block mb-4
+
+    h1
+        @apply mt-0
+    
+    h2
+        @apply mt-0
+
+.widget-title
+    @apply text-lg uppercase

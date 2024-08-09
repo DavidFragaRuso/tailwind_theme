@@ -1,0 +1,74 @@
+/*! 
+    Theme Name: TailWind Theme
+    Theme URI: https://dfraga.es/
+    Author: David Fraga
+    Author URI: https://dfraga.es/
+    Description: Tema custom con Tailwind CSS
+    Tested up to: 6.6
+    Requires PHP: 7.4
+    License: GNU General Public License v2 or later
+    Text Domain: tailtheme
+    Tags: custom-background, custom-logo, custom-menu, featured-* images, threaded-comments, translation-ready
+
+@import "tailwindcss/base"
+@import "tailwindcss/components"
+@import "tailwindcss/utilities"
+
+@import "./components/header"
+@import "./components/page"
+@import "./components/single"
+@import "./components/hero"
+@import "./components/blocks"
+@import "./components/inputs"
+@import "./components/widjets"
+@import "./components/footer"
+
+@font-face
+  font-family: "Montserrat",
+  src: url('./public/fonts/Montserrat-VariableFont_wght.woff2') format('woff2')
+@font-face
+  font-family: "Montserrat",
+  src: url('./public/fonts/Montserrat-VariableFont_wght.woff') format('woff')
+@font-face
+  font-family: "Montserrat",
+  src: url('./public/fonts/Montserrat-VariableFont_wght.ttf') format('truetype')
+
+@layer base
+  body
+    @apply text-base font-body text-gray-800
+  h1
+    @apply text-2xl lg:text-2xl font-bold leading-[44px] lg:leading-[50px] mb-6 mt-8
+  h2
+    @apply text-xl font-bold leading-[30px] lg:leading-[43px] mb-8 mt-8
+  h3 
+    @apply text-lg font-bold leading-[30px] lg:leading-[35px] mb-4 mt-4
+  h4
+    @apply font-bold mb-4
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6
+    @apply font-display  text-primary
+  p
+    @apply mb-8
+  ul
+    @apply list-disc pl-6 mb-8
+  ol
+    @apply list-decimal pl-6 mb-8
+  a
+    @apply text-secondary
+  a:hover
+    @apply text-primary underline
+  input,
+  select,
+  textarea
+    @apply border-[1px] border-gray-300 rounded-md p-2 text-black
+  input[type=submit]
+    @apply bg-primary text-white border-none text-center py-1 px-2 rounded cursor-pointer hover:bg-secondary hover:text-white
+
+@layer components
+  .show-element
+    display: block!important
+    max-height: 1000px!important
