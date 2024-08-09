@@ -260,3 +260,8 @@ require get_template_directory() . '/inc/customizer.php';
  */
 require get_template_directory() . '/inc/theme-options.php';
 $theme_customizer = new Tailwind_Theme_Customizer;
+
+/**
+ * Theme SEO functions
+ */
+require get_template_directory() . '/inc/seo-functions.php';
