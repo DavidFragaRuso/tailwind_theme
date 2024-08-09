@@ -23,7 +23,7 @@
         /**
          * Add Organization Data for Schema
          */
-        //$this->organization_callout_section( $wp_customize );
+        $this->organization_callout_section( $wp_customize );
     }
 
     /**
@@ -286,6 +286,69 @@
             'section' => 'social-networks-callout-section',
             'settings' => 'margin-callout-display',
             'type' => 'number'
+        )));
+    }
+
+    private function organization_callout_section( $wp_customize ) {
+        $wp_customize->add_section('organization-callout-section', array(
+            'title' => __(esc_html('Corporative Data', 'tailtheme')),
+            'priority' => 180,
+            'description' => __('Add here the data about your company for SEO purposes.', 'tailtheme'),
+        ));
+        //Fiscal name
+        $wp_customize->add_setting('name-callout-display', array(
+            'default' => '',
+            'sanitize_callback' => array( $this, 'sanitize_custom_text' )
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'name-callout-display-control', array(
+            'label' => __(esc_html('Fiscal name', 'tailtheme')),
+            'section' => 'organization-callout-section',
+            'settings' => 'name-callout-display',
+            'type' => 'text'
+        )));
+        //VAT - NIF
+        $wp_customize->add_setting('vat-callout-display', array(
+            'default' => '',
+            'sanitize_callback' => array( $this, 'sanitize_custom_text' )
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'vat-callout-display-control', array(
+            'label' => __(esc_html('VAT/NIF/CIF', 'tailtheme')),
+            'section' => 'organization-callout-section',
+            'settings' => 'vat-callout-display',
+            'type' => 'text'
+        )));
+        //Address
+        $wp_customize->add_setting('address-callout-display', array(
+            'default' => '',
+            'sanitize_callback' => array( $this, 'sanitize_custom_text' )
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'address-callout-display-control', array(
+            'label' => __(esc_html('Adress', 'tailtheme')),
+            'section' => 'organization-callout-section',
+            'settings' => 'address-callout-display',
+            'type' => 'text'
+        )));
+        //Phone
+        $wp_customize->add_setting('phone-callout-display', array(
+            'default' => '',
+            'sanitize_callback' => array( $this, 'sanitize_custom_text' )
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'phone-callout-display-control', array(
+            'label' => __(esc_html('phone', 'tailtheme')),
+            'section' => 'organization-callout-section',
+            'settings' => 'phone-callout-display',
+            'type' => 'text'
+        )));
+        //Email for legal data
+        $wp_customize->add_setting('email-callout-display', array(
+            'default' => '',
+            'sanitize_callback' => array( $this, 'sanitize_custom_email' )
+        ));
+        $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'email-callout-display-control', array(
+            'label' => __(esc_html('Email for legal data', 'tailtheme')),
+            'section' => 'organization-callout-section',
+            'settings' => 'email-callout-display',
+            'type' => 'text'
         )));
     }
 
