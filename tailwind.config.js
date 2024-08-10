@@ -2,12 +2,10 @@
 
 const customColors = {
     primary: { 
-        DEFAULT: '#75734A',
-        medium: '#B7B380',
-        light: '#C9C79A'
+        DEFAULT: 'var(--color-primary)'
     },
     secondary: {
-        DEFAULT: '#526842'
+        DEFAULT: 'var(--color-secondary)',
     },
     gray: {
         100: '#f5f5f5',

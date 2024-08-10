@@ -61,7 +61,7 @@
 
         //Primary color
         $wp_customize->add_setting('primary-color-callout-display', array(
-            'default' => '#ffffff',
+            'default' => '#487AD6',
             'sanitize_callback' => array( $this, 'sanitize_hex_color' )
         ));
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'primary-color-callout-display', array(
@@ -72,7 +72,7 @@
 
         //Secondary color
         $wp_customize->add_setting('secondary-color-callout-display', array(
-            'default' => '#000000',
+            'default' => '#8A38F2',
             'sanitize_callback' => array( $this, 'sanitize_hex_color' )
         ));
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'secondary-color-callout-display', array(
@@ -453,16 +453,21 @@
     }
 
     public function tailtheme_cd_option_css(){
-        $main_color = get_theme_mod('color-callout-display');
-        $hover_color = get_theme_mod('hcolor-callout-display');
-        $size_icon = get_theme_mod('size-callout-display');
-        $margin_icon = get_theme_mod( 'margin-callout-display' );
-        if (empty($main_color)) : $main_color = '#000000'; endif;
-        if (empty($hover_color)) : $hover_color = '#464646'; endif;
-        if (empty($size_icon)) : $size_icon = '30'; endif;
-        if(empty($margin_icon)) : $margin_icon = '15'; endif;
+        /*
+        $text_color = get_theme_mod('text-color-callout-display', '#000000');
+        $main_color = get_theme_mod('color-callout-display', '#000000');
+        $hover_color = get_theme_mod('hcolor-callout-display', '#464646');
+        $size_icon = get_theme_mod('size-callout-display', '30');
+        $margin_icon = get_theme_mod( 'margin-callout-display', '15' );
+        */
         ?>
-        <style type="text/css" id="dfr-option-css">
+        <style>
+            :root {
+                --color-primary: <?php echo get_theme_mod('primary-color-callout-display', '#000000'); ?>;
+                --color-secondary: <?php echo get_theme_mod('secondary-color-callout-display', '#000000'); ?>;
+            }
+        </style>
+        <style type="text/css" id="tailteheme-social-css">
             ul.social-links{
                 display: flex;
                 flex-wrap: nowrap;
@@ -470,11 +475,11 @@
                 padding-left: 0;
             }
             ul.social-links li{
-                margin-right: <?php echo $margin_icon; ?>px;
+                margin-right: <?php echo get_theme_mod( 'margin-callout-display', '15' ); ?>px;
             }
             ul.social-links li a svg{
-                width: <?php echo $size_icon; ?>px;
-                height: <?php echo $size_icon; ?>px;
+                width: <?php echo get_theme_mod('size-callout-display', '30'); ?>px;
+                height: <?php echo get_theme_mod('size-callout-display', '30'); ?>px;
             }
             ul.social-links li a svg path, 
             ul.social-links li a svg circle, 
@@ -482,7 +487,7 @@
             ul.social-links li a svg defs,
             ul.social-links li a svg g,
             ul.social-links li a svg g path{
-                fill: <?php echo $main_color; ?>;
+                fill: <?php echo get_theme_mod('color-callout-display', '#000000'); ?>;
             }
             ul.social-links li a:hover svg path,
             ul.social-links li a:hover svg circle,
@@ -490,7 +495,7 @@
             ul.social-links li a:hover svg defs,
             ul.social-links li a:hover svg g,
             ul.social-links li a:hover svg g path{
-                fill: <?php echo $hover_color; ?>;
+                fill: <?php echo get_theme_mod('hcolor-callout-display', '#464646'); ?>;
             }
         </style>
         <?php

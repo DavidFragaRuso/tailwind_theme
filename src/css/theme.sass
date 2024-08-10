@@ -10,6 +10,10 @@
     Text Domain: tailtheme
     Tags: custom-background, custom-logo, custom-menu, featured-* images, threaded-comments, translation-ready
 
+:root 
+    --color-primary: <?php echo get_theme_mod('primary_color') ?>
+    --color-secondary: <?php echo get_theme_mod('secondary_color') ?>
+
 @import "tailwindcss/base"
 @import "tailwindcss/components"
 @import "tailwindcss/utilities"
@@ -17,8 +21,8 @@
 @import "./components/header"
 @import "./components/page"
 @import "./components/single"
-@import "./components/hero"
-@import "./components/blocks"
+//@import "./components/hero"
+//@import "./components/blocks"
 @import "./components/inputs"
 @import "./components/widjets"
 @import "./components/footer"
