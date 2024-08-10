@@ -150,6 +150,7 @@ function tailtheme_setup() {
 	/**
 	 * Customize padding on blocks
 	 */
+	add_theme_support( 'appearance-tools' );
 	add_theme_support('custom-spacing');
 
 }
