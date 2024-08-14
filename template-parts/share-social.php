@@ -1,0 +1,20 @@
+<div class="share-social mt-12 mb-12">
+    <span class="font-bold text-base block mb-4 mt-8"><?php echo esc_html__( '¡Si te ha gustado ayúdanos a seguir aportando compartiendo este artículo!', 'dfrwp' ); ?></span>
+    <div class="flex no-wrap flex-row gap-3 share-grid">
+        <a rel="nofollow" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo get_permalink(); ?>" target="_blank" aria-label="Compartir en Facebook" class="bg-[#1877F2]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36px" height="36px" viewBox="0 0 10.798 20.849"><path id="social_facebook_o_n" d="M12.929,11.38h3.179l.5-3.857H12.929V4.83a1.355,1.355,0,0,1,1.32-1.355h2.389V0H13.3A4.274,4.274,0,0,0,9.028,4.274V7.523H5.84V11.38H9.028v9.469h3.9Z" transform="translate(-5.84)"/></svg>
+        </a>
+        <a rel="nofollow" href="https://twitter.com/intent/tweet?url=<?php echo get_permalink(); ?>&text=<?php echo get_the_title(); ?>" target="_blank" aria-label="Compartir en Twitter" class="bg-[#1DA1F2]">
+            <svg width="36px" height="36px" viewBox="0 0 32 32"><path d="M2 4 C6 8 10 12 15 11 A6 6 0 0 1 22 4 A6 6 0 0 1 26 6 A8 8 0 0 0 31 4 A8 8 0 0 1 28 8 A8 8 0 0 0 32 7 A8 8 0 0 1 28 11 A18 18 0 0 1 10 30 A18 18 0 0 1 0 27 A12 12 0 0 0 8 24 A8 8 0 0 1 3 20 A8 8 0 0 0 6 19.5 A8 8 0 0 1 0 12 A8 8 0 0 0 3 13 A8 8 0 0 1 2 4"></path></svg>
+        </a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo get_permalink(); ?>&title=<?php echo get_the_title(); ?>" target="_blank" aria-label="Compartir en LinkedIn" class="bg-[#0077B5]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36px" height="36px" viewBox="0 0 19.19 19.113"><path d="M3.151,1A2.3,2.3,0,1,1,.84,3.293,2.3,2.3,0,0,1,3.151,1Z" transform="translate(-0.84 -1)" /><path d="M4.5,21.066H1.844a.634.634,0,0,1-.634-.634V8.9a.634.634,0,0,1,.634-.634H4.5a.634.634,0,0,1,.669.634V20.432a.634.634,0,0,1-.669.634Z" transform="translate(-0.889 -1.954)"/><path d="M21.027,12.344A4.344,4.344,0,0,0,16.683,8h-.695a3.866,3.866,0,0,0-3.179,1.659A3.571,3.571,0,0,0,12.6,10h0V8.53a.269.269,0,0,0-.269-.261H8.961A.269.269,0,0,0,8.7,8.53V20.761a.269.269,0,0,0,.261.269h3.475a.269.269,0,0,0,.261-.261V13.7a2.181,2.181,0,1,1,4.361,0V20.77a.269.269,0,0,0,.269.261H20.8a.261.261,0,0,0,.261-.261V12.344Z" transform="translate(-1.872 -1.919)" /></svg>
+        </a>
+        <a rel="nofollow" href="https://api.whatsapp.com/send?text=<?php echo get_the_title() . ' ' . get_permalink(); ?>" target="_blank" aria-label="Compartir en WhatsApp" class="bg-[#25D366]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36px" height="36px" viewBox="0 0 23.4 24.013"><g transform="translate(-0.187 0.002)"><path d="M11.49,0a11.9,11.9,0,0,0-10,17.3L.2,23.44A.47.47,0,0,0,.76,24l6-1.43a11.71,11.71,0,0,0,5.11,1.24A11.907,11.907,0,0,0,11.49,0Zm7.17,18.48a9.26,9.26,0,0,1-6.59,2.73,9.14,9.14,0,0,1-4.15-1l-.84-.42-3.68.88.77-3.77-.41-.81a9.314,9.314,0,1,1,14.9,2.4Z" fill="#000000"/><path d="M17.84,14.48l-2.3-.66a.87.87,0,0,0-.85.23l-.57.57a.83.83,0,0,1-.91.19,12.34,12.34,0,0,1-4-3.5.83.83,0,0,1,.07-.93l.49-.64a.88.88,0,0,0,.11-.87l-1-2.19a.87.87,0,0,0-1.35-.31,3.91,3.91,0,0,0-1.5,2.29c-.16,1.61.53,3.65,3.15,6.09,3,2.83,5.45,3.2,7,2.82a3.88,3.88,0,0,0,2.06-1.8.86.86,0,0,0-.4-1.29Z" fill="#000000"/></g></svg>
+        </a>
+        <a rel="nofollow" href="mailto:?subject=<?php echo get_the_title(); ?>&body=<?php echo get_permalink(); ?>" target="_blank" aria-label="Compartir por Email" class="bg-[#D44638]">
+            <svg height="36px" width="36px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330.001 330.001" xml:space="preserve"><g id="XMLID_348_"><path id="XMLID_350_" d="M173.871,177.097c-2.641,1.936-5.756,2.903-8.87,2.903c-3.116,0-6.23-0.967-8.871-2.903L30,84.602 L0.001,62.603L0,275.001c0.001,8.284,6.716,15,15,15L315.001,290c8.285,0,15-6.716,15-14.999V62.602l-30.001,22L173.871,177.097z"   /><polygon id="XMLID_351_" points="165.001,146.4 310.087,40.001 19.911,40 	"/></g></svg>
+        </a>
+    </div>
+</div>

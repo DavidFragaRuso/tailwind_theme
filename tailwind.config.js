@@ -83,7 +83,8 @@ module.exports = {
           "-10": "-10"
         },
         textShadow: {
-          DEFAULT: '3px 3px 0px #646464'
+          DEFAULT: '3px 3px 0px #646464',
+          sm: '1px 1px 2px #646464'
         }
       },
     },

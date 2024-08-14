@@ -10,28 +10,22 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php
-		if ( is_singular() ) :
-			the_title( '<h1 class="entry-title">', '</h1>' );
-		else :
-			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-		endif;
-
-		if ( 'post' === get_post_type() ) :
+	<?php  
+	if ( has_post_thumbnail() ) {
+		$thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'featured-image' );
+		//var_dump($thumb);
+		if ( ! empty( $thumb[0] ) ) {
+			//echo get_the_post_thumbnail( $post->ID, 'full', array( 'class' => 'post-thumbnail' ) );
 			?>
-			<div class="entry-meta">
-				<?php
-				tailtheme_posted_on();
-				tailtheme_posted_by();
-				?>
-			</div><!-- .entry-meta -->
-		<?php endif; ?>
-	</header><!-- .entry-header -->
-
-	<?php tailtheme_post_thumbnail(); ?>
-
-	<div class="entry-content">
+			<div class="relative w-full"><img class="post-thumbnail w-full mx-auto shadow-md" width="1200px" height="675px" alt="<?php the_title(); ?>" src="<?php echo $thumb[0] ?>" decoding="async" /></div>
+			<?php 
+		}
+	}else{
+		?><div class="relative w-full"><img class="post-thumbnail w-full mx-auto shadow-md" width="1200px" height="675px" alt="" decoding="async" src="<?php echo get_template_directory_uri(); ?>/public/imgs/dummy.jpg" /></div><?php
+	}
+	
+	?>
+	<div class="entry-content bg-white px-4 py-8 mx-2 md:mx-0 border-b-2 border-gray-400">
 		<?php
 		the_content(
 			sprintf(
@@ -54,10 +48,13 @@
 				'after'  => '</div>',
 			)
 		);
+
+		get_template_part( 'template-parts/share', 'social');
+
 		?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
-		<?php tailtheme_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+	<!--<footer class="entry-footer border-[1px] border-gray px-4 py-8 rounded-lg shadow-md">
+		<?php //tailtheme_entry_footer(); ?>
+	</footer>-->
 </article><!-- #post-<?php the_ID(); ?> -->
