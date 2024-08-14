@@ -1053,7 +1053,7 @@ input[type=submit]:hover {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .text-shadow {
-  text-shadow: 3px 3px 0px #75734A;
+  text-shadow: 3px 3px 0px #646464;
 }
 #wpadminbar {
   position: fixed !important;

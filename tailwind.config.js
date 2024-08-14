@@ -83,7 +83,7 @@ module.exports = {
           "-10": "-10"
         },
         textShadow: {
-          DEFAULT: '3px 3px 0px #75734A'
+          DEFAULT: '3px 3px 0px #646464'
         }
       },
     },
