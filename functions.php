@@ -148,7 +148,7 @@ function tailtheme_setup() {
 	add_theme_support('align-wide');
 
 	/**
-	 * Customize padding on blocks
+	 * Customize padding, margin, border and more on blocks
 	 */
 	add_theme_support( 'appearance-tools' );
 	add_theme_support('custom-spacing');
@@ -222,7 +222,6 @@ add_action( 'widgets_init', 'tailtheme_widgets_init' );
 function tailtheme_scripts() {
 	wp_enqueue_style( 'tailtheme-style', get_stylesheet_uri(), array(), _S_VERSION );
 
-	wp_enqueue_script( 'tailtheme-navigation', get_template_directory_uri() . '/public/js/navigation.js', array(), _S_VERSION, true);
 	wp_enqueue_script('theme-functions', get_template_directory_uri() . '/public/js/theme.js', array('jquery'), _S_VERSION, true);
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
