@@ -47,7 +47,7 @@ get_header();
 			</div>
 		</div>
 	</div>
-	<div class="my-8">
+	<div class="mb-8">
 		<?php get_sidebar(); ?>
 	</div>
 </div>
