@@ -179,9 +179,9 @@ function tailtheme_widgets_init() {
 			'name'          => esc_html__( 'Sidebar', 'tailtheme' ),
 			'id'            => 'sidebar-1',
 			'description'   => esc_html__( 'Add widgets here.', 'tailtheme' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'before_widget' => '<section id="%1$s" class="widget mb-8 %2$s">',
 			'after_widget'  => '</section>',
-			'before_title'  => '<h3 class="widget-title">',
+			'before_title'  => '<h3 class="widget-title mt-0 text-base block mb-2 uppercase">',
 			'after_title'   => '</h3>',
 		)
 	);
