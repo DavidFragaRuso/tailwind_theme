@@ -78,8 +78,12 @@ get_header();
 						?><div class="w-full mb-8"><nav class="nav-links"><?php
 						echo paginate_links(
 							array(
-								'base' => '%_%',
-								'format' => '?paged=%#%'
+								'base' => str_replace(999999999, '%#%', esc_url(get_pagenum_link(999999999))),
+								'format' => 'page/%#%',
+								'current' => max(1, get_query_var('paged')),
+        						'total' => $wp_query->max_num_pages,
+								'end_size' => 2,
+        						'mid_size' => 1,
 							)
 						);
 						?></nav></div><?php
