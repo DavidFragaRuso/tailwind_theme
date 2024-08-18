@@ -50,7 +50,6 @@
         toggleButton.addEventListener("click", changeVisiblility, false);
         function changeVisiblility(e) {
             e.preventDefault();
-            console.log("Llega");
             document.getElementById("main-menu").classList.toggle('show-element');
         }
 

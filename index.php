@@ -60,7 +60,7 @@ get_header();
 						//get_template_part( 'template-parts/content', 'filterposts' );
 						?>
 						
-						<div id="post-grid" class="flex flex-col md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-3">
+						<div id="post-grid" class="flex flex-col md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-3 mb-8">
 						<?php
 						/* Start the Loop */
 						while ( have_posts() ) :

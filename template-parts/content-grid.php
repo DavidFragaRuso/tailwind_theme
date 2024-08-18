@@ -6,7 +6,7 @@
  */
 
 ?>
-    <article id="post-<?php the_ID(); ?>" <?php post_class( 'block border-1 rounded-lg overflow-hidden border-gray-200 shadow-md mb-8 bg-white' ); ?>>
+    <article id="post-<?php the_ID(); ?>" <?php post_class( 'block border-1 rounded-lg overflow-hidden border-gray-200 shadow-md bg-white' ); ?>>
         <a href="<?php echo the_permalink(); ?>" rel="bookmark">
             <div class="entry-header">
             <?php
@@ -15,7 +15,7 @@
             if ( ! empty( $thumb[0] ) ) {
                 echo get_the_post_thumbnail( $post->ID, 'full', array( 'class' => 'post-thumbnail' ) ); 
             }else{
-                ?><img class="post-thumbnail" width="900px" height="650px" alt="" src="<?php echo get_template_directory_uri(); ?>/public/imgs/dummy.jpg" /><?php
+                ?><img class="post-thumbnail" width="900px" height="300px" alt="" src="<?php echo get_template_directory_uri(); ?>/public/imgs/dummy.jpg" /><?php
             }
 
             ?>    
