@@ -88,3 +88,67 @@ function add_seo_meta_tags() {
     }
 }
 add_action('wp_head', 'add_seo_meta_tags');
+
+/**
+ * Add featured images on categories and tags for SEO purposes
+ */
+// Agregar campo de imagen destacada con vista previa en la pantalla de edición de categorías/etiquetas
+function add_term_image_field() {
+    ?>
+    <div class="form-field term-group">
+        <label for="term_image"><?php _e('Imagen destacada', 'tailtheme'); ?></label>
+        <input type="hidden" id="term_image" name="term_image" value="" />
+        <div id="term-image-preview" style="margin-top:10px;">
+            <img src="" alt="" style="max-width:100%; height:auto;" />
+        </div>
+        <button class="upload_image_button button"><?php _e('Subir/Seleccionar imagen', 'tailtheme'); ?></button>
+        <button class="remove_image_button button"><?php _e('Eliminar imagen', 'tailtheme'); ?></button>
+    </div>
+    <?php
+}
+add_action('category_add_form_fields', 'add_term_image_field');
+add_action('post_tag_add_form_fields', 'add_term_image_field');
+
+// Editar campo con vista previa en la edición de categorías/etiquetas
+function edit_term_image_field($term) {
+    $term_image = get_term_meta($term->term_id, 'term_image', true);
+    ?>
+    <tr class="form-field term-group">
+        <th scope="row" valign="top">
+            <label for="term_image"><?php _e('Imagen destacada', 'tailtheme'); ?></label>
+        </th>
+        <td>
+            <input type="hidden" id="term_image" name="term_image" value="<?php echo esc_attr($term_image); ?>" />
+            <div id="term-image-preview" style="margin-top:10px;">
+                <?php if ($term_image) { ?>
+                    <img src="<?php echo esc_url($term_image); ?>" alt="" style="max-width:100%; height:auto;" />
+                <?php } else { ?>
+                    <img src="" alt="" style="max-width:100%; height:auto;" />
+                <?php } ?>
+            </div>
+            <button class="upload_image_button button"><?php _e('Subir/Seleccionar imagen', 'tailtheme'); ?></button>
+            <button class="remove_image_button button"><?php _e('Eliminar imagen', 'tailtheme'); ?></button>
+        </td>
+    </tr>
+    <?php
+}
+add_action('category_edit_form_fields', 'edit_term_image_field');
+add_action('post_tag_edit_form_fields', 'edit_term_image_field');
+
+function save_term_image_field($term_id) {
+    if(isset($_POST['term_image'])){
+        update_term_meta($term_id, 'term_image', $_POST['term_image']);
+    }
+}
+add_action('created_category', 'save_term_image_field', 10, 2);
+add_action('edited_category', 'save_term_image_field', 10, 2);
+add_action('created_post_tag', 'save_term_image_field', 10, 2);
+add_action('edited_post_tag', 'save_term_image_field', 10, 2);
+
+function enqueue_term_media_uploader() {
+    if(isset($_GET['taxonomy'])) {
+        wp_enqueue_media();
+        wp_enqueue_script('term_image_script', get_template_directory_uri() . '/public/js/category-image.js', array('jquery'), null, true);
+    }
+}
+add_action('admin_enqueue_scripts', 'enqueue_term_media_uploader');
