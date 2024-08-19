@@ -37,7 +37,9 @@ while ( have_posts() ) :
 	<!--</div>-->
 	<div class="">
 		<div class="container pt-12 pb-16">
-		<?php 
+		<?php
+			if (function_exists('custom_breadcrumb')) custom_breadcrumb($post);
+			 
 			if ( is_singular() ) :
 				the_title( '<h1 class="entry-title text-white text-shadow mt-0">', '</h1>' );
 			else :

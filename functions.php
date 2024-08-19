@@ -262,6 +262,11 @@ require get_template_directory() . '/inc/theme-options.php';
 $theme_customizer = new Tailwind_Theme_Customizer;
 
 /**
+ * Theme BreadCrumbs
+ */
+require get_template_directory() . '/inc/breadcrumbs.php';
+
+/**
  * Theme SEO functions
  */
 require get_template_directory() . '/inc/seo-functions.php';

@@ -32,23 +32,12 @@ get_header();
 		<div class="">
 			<div class="container pt-12 pb-16">
 			<?php 
+				if (function_exists('custom_breadcrumb')) custom_breadcrumb($post);
+				
 				if ( is_singular() ) :
-					the_title( '<h1 class="entry-title text-white text-shadow mt-0">', '</h1>' );
+					the_title( '<h1 class="entry-title text-white text-shadow mt-0 mb-0">', '</h1>' );
 				else :
 					the_title( '<h2 class="entry-title text-white"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-				endif;
-				if ( 'post' === get_post_type() ) :
-					?>
-					<div class="entry-meta">
-						<p class="text-white text-shadow-sm">
-							<?php tailtheme_posted_on(); ?>
-						</p>
-						<p class="text-white text-shadow-sm">
-						<?php tailtheme_posted_by(); ?>
-						</p>
-						
-					</div><!-- .entry-meta -->
-				<?php 
 				endif;
 				?>
 			</div>

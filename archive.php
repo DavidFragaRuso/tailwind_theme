@@ -17,6 +17,7 @@ get_header();
 	<div class="page-header-bg">
 		<div class="container pt-12 pb-16">				
 			<?php
+			if (function_exists('custom_breadcrumb')) custom_breadcrumb($post);
 			the_archive_title( '<h1 class="page-title  text-white text-shadow mt-0">', '</h1>' );
 			the_archive_description( '<div class="archive-description text-white">', '</div>' );
 			?>

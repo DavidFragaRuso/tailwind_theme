@@ -17,7 +17,7 @@
 		if ( ! empty( $thumb[0] ) ) {
 			//echo get_the_post_thumbnail( $post->ID, 'full', array( 'class' => 'post-thumbnail' ) );
 			?>
-			<div class="relative w-full"><img class="post-thumbnail w-full mx-auto shadow-md" width="1200px" height="675px" alt="<?php the_title(); ?>" src="<?php echo $thumb[0] ?>" decoding="async" /></div>
+			<div class="relative w-full mb-4"><img class="post-thumbnail w-full mx-auto shadow-md" width="1200px" height="675px" alt="<?php the_title(); ?>" src="<?php echo $thumb[0] ?>" decoding="async" /></div>
 			<?php 
 		}
 	}else{
@@ -25,8 +25,18 @@
 	}
 	
 	?>
-	<div class="entry-content bg-white px-4 py-8 mx-2 md:mx-0 border-b-2 border-gray-400">
+	<div class="entry-content bg-white px-4 md:px-0 py-8 mx-2 md:mx-0 border-b-2 border-gray-400">
 		<?php
+		if ( 'post' === get_post_type() ) :
+			?>
+			<div class="entry-meta">
+				<p class="text-sm">
+					<?php tailtheme_posted_on(); ?> <?php tailtheme_posted_by(); ?>
+				</p>
+			</div><!-- .entry-meta -->
+		<?php 
+		endif;
+
 		the_content(
 			sprintf(
 				wp_kses(
