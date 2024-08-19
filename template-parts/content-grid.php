@@ -24,32 +24,38 @@
         <div class="p-4">
             <?php
             $tags = get_the_tags();
-            //var_dump($tags);
             if ( $tags ):
             ?>
-            <span>
+            <div class="mb-2">
                 <?php 
                 foreach ( $tags as $tag ){
                     $tag_link = get_tag_link( $tag->term_id );
                     //var_dump( $tag_link );
-                    echo '<a class="bg-black px-2 text-white text-xs mr-4 p-1 hover:no-underline hover:bg-primary hover:text-white" href="' . $tag_link . '" rel="tag">' . $tag->name . '</a>'; 
+                    echo '<a class="bg-black px-2 text-white text-xs mr-2 p-1 hover:no-underline bg-secondary hover:text-white hover:bg-primary" href="' . $tag_link . '" rel="tag">' . $tag->name . '</a>'; 
                 }
                 ?>
-            </span>
+            </div>
             <?php
             endif;
             //if ( is_singular() ) :
                 //the_title( '<h1 class="entry-title">', '</h1>' );
             //else :
-                the_title( '<h2 class="entry-title text-primary text-base leading-[30px] font-medium mt-4 mb-2"><a class="hover:no-underline text-primary hover:text-secondary" href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+                the_title( '<h2 class="entry-title text-primary text-base leading-[22px] font-medium mt-0 mb-2"><a class="hover:no-underline text-primary hover:text-secondary" href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
             //endif;
 
             if ( 'post' === get_post_type() ) :
                 ?>
-                <div class="entry-meta posted-on mb-4 text-sm">
+                <div class="entry-meta posted-on text-sm">
                     <?php //dfrwp_posted_on(); ?>
                 </div><!-- .entry-meta -->
-            <?php endif; ?>   
+            <?php endif; ?>
+            <?php 
+            $excerpt = '';
+            if (has_excerpt()) {
+                $excerpt = wp_strip_all_tags(get_the_excerpt());
+            }
+            echo '<p class="text-sm mb-2">' . $excerpt . '</p>';
+            ?>   
         </div>
                     
     </article>

@@ -60,7 +60,7 @@ get_header();
 						//get_template_part( 'template-parts/content', 'filterposts' );
 						?>
 						
-						<div id="post-grid" class="flex flex-col md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-3 mb-8">
+						<div id="post-grid" class="flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3 mb-8">
 						<?php
 						/* Start the Loop */
 						while ( have_posts() ) :
@@ -75,7 +75,7 @@ get_header();
 
 						endwhile;
 						?></div><?php
-						?><div class="w-full mb-8"><nav class="nav-links"><?php
+						?><div class="w-full mb-8 mt-4"><nav class="nav-links"><?php
 						echo paginate_links(
 							array(
 								'base' => str_replace(999999999, '%#%', esc_url(get_pagenum_link(999999999))),
