@@ -54,7 +54,7 @@ get_header();
 					$related_posts = get_related_posts(get_the_ID());
 					if ($related_posts->have_posts()) :
 						?>
-						<section class="related-posts">
+						<section class="related-posts px-8">
 							<h2><?php _e('Related Posts', 'tailtheme'); ?></h2>
 							<div id="related-grid" class="flex flex-col md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-3">
 								<?php while ($related_posts->have_posts()) : $related_posts->the_post(); ?>
@@ -67,7 +67,7 @@ get_header();
 					endif;
 					?>
 				</div>
-				<div class="post-navigation my-8">
+				<div class="post-navigation px-8 my-8">
 					<h2><?php _e( 'Post navigation', 'tailtheme' ); ?></h2>
 					<?php
 					the_post_navigation(

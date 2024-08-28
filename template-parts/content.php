@@ -25,7 +25,7 @@
 	}
 	
 	?>
-	<div class="entry-content bg-white px-4 md:px-0 py-8 mx-2 md:mx-0 border-b-2 border-gray-400">
+	<div class="entry-content bg-white px-4 md:px-0 py-8 mx-2 md:mx-0">
 		<?php
 		if ( 'post' === get_post_type() ) :
 			?>

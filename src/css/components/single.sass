@@ -16,7 +16,7 @@
 .wp-block-code code
     @apply overflow-x-scroll pb-4 whitespace-pre
 
-/*Share widjet on single post pages*/
+//Share widjet on single post pages
 .share-social
     .share-grid
         a
@@ -27,3 +27,11 @@
                 path
                     color: white
                     fill: white
+//Post Navigation
+.nav-links
+    @apply md:flex md:flex-nowrap md:gap-4 md:justify-between
+    > div
+        @apply mb-4 md:w-1/2
+    .nav-next
+        a
+            @apply md:block md:text-right
