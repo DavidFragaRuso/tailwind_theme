@@ -49,7 +49,25 @@ get_header();
 				<?php
 				get_template_part( 'template-parts/content', get_post_type() );
 				?>
-				<div class="post-navigation mx-8">
+				<div class="my-8">
+					<?php 
+					$related_posts = get_related_posts(get_the_ID());
+					if ($related_posts->have_posts()) :
+						?>
+						<section class="related-posts">
+							<h2><?php _e('Related Posts', 'tailtheme'); ?></h2>
+							<div id="related-grid" class="flex flex-col md:grid md:grid-cols-2 md:gap-4 xl:grid-cols-3">
+								<?php while ($related_posts->have_posts()) : $related_posts->the_post(); ?>
+									<!--<li><a href="<?php //the_permalink(); ?>"><?php //the_title(); ?></a></li>-->
+									<?php get_template_part( 'template-parts/content', 'grid' ); ?>
+								<?php endwhile; ?>
+							</div>
+						</section>
+						<?php
+					endif;
+					?>
+				</div>
+				<div class="post-navigation my-8">
 					<h2><?php _e( 'Post navigation', 'tailtheme' ); ?></h2>
 					<?php
 					the_post_navigation(

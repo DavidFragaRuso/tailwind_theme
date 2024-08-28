@@ -233,12 +233,33 @@ add_action( 'wp_enqueue_scripts', 'tailtheme_scripts' );
 /**
  * Add SVG files to mime type
  */
-
  function allow_svg_upload( $mimes ) {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
 }
 add_filter( 'upload_mimes', 'allow_svg_upload' );
+
+/**
+ * Get 3 related posts from a post category
+ */
+function get_related_posts($post_id) {
+    $categories = wp_get_post_categories($post_id);
+    
+    if ($categories) {
+        $args = array(
+            'category__in' => $categories,
+            'post__not_in' => array($post_id),
+            'posts_per_page' => 3,
+            'orderby' => 'date',
+            'order' => 'DESC'
+        );
+
+        $related_posts = new WP_Query($args);
+        return $related_posts;
+    } else {
+        return null;
+    }
+}
 
 /**
  * Custom template tags for this theme.
