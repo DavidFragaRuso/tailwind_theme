@@ -34,10 +34,10 @@ get_header();
 			<?php
 		else:
 			?>
-			<div class="marquee mb-8 bg-primary-light">
+			<div class="marquee shadow-md bg-gray-400 mb-4 lg:mb-8">
 				<div class="box-border">
 					<div class="container pt-12 pb-16">
-						<h1 class="text-primary mt-0 mb-0"><?php  single_post_title(); ?></h1>
+						<h1 class="text-white text-xl mt-0 mb-0"><?php  single_post_title(); ?></h1>
 					</div>
 				</div>
 			</div>	
