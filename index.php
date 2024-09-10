@@ -24,9 +24,9 @@ get_header();
 				<!--<div class="py-12 bg-gradient-to-t from-black">-->
 				<div class="py-8">
 					<div class="container">
-						<!--<h1 class="text-white text-shadow text-xl mt-0"><?php bloginfo('name'); ?></h1>-->
-						<!--<h1 class="text-white text-xl mt-0 mb-2"><?php bloginfo('name'); ?></h1>-->
-						<!--<span class="text-white text-lg text-shadow"><?php bloginfo('description') ?></span>-->
+						<!--<h1 class="text-white text-shadow text-xl mt-0"><?php //bloginfo('name'); ?></h1>-->
+						<!--<h1 class="text-white text-xl mt-0 mb-2"><?php //bloginfo('name'); ?></h1>-->
+						<!--<span class="text-white text-lg text-shadow"><?php //bloginfo('description') ?></span>-->
 						<h1 class="text-white text-xl mt-0 mb-0"><?php bloginfo('description') ?></h1>
 					</div>
 				</div>
@@ -75,7 +75,7 @@ get_header();
 
 						endwhile;
 						?></div><?php
-						?><div class="w-full mb-8 mt-4"><nav class="nav-links"><?php
+						?><div class="w-full mb-8 mt-4"><nav class="paginate-links"><?php
 						echo paginate_links(
 							array(
 								'base' => str_replace(999999999, '%#%', esc_url(get_pagenum_link(999999999))),

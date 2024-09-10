@@ -1,1 +1,34 @@
-jQuery(document).ready((function(e){var t;e(".upload_image_button").click((function(a){a.preventDefault(),t||(t=wp.media.frames.file_frame=wp.media({title:"Seleccionar imagen destacada",button:{text:"Usar esta imagen"},multiple:!1})).on("select",(function(){var a=t.state().get("selection").first().toJSON();e("#term_image").val(a.url),e("#term-image-preview img").attr("src",a.url)})),t.open()})),e(".remove_image_button").click((function(t){t.preventDefault(),e("#term_image").val(""),e("#term-image-preview img").attr("src","")}))}));
+/******/ (() => { // webpackBootstrap
+/*!**********************************!*\
+  !*** ./src/js/category-image.js ***!
+  \**********************************/
+jQuery(document).ready(function ($) {
+  var mediaUploader;
+  $('.upload_image_button').click(function (e) {
+    e.preventDefault();
+    if (mediaUploader) {
+      mediaUploader.open();
+      return;
+    }
+    mediaUploader = wp.media.frames.file_frame = wp.media({
+      title: 'Seleccionar imagen destacada',
+      button: {
+        text: 'Usar esta imagen'
+      },
+      multiple: false
+    });
+    mediaUploader.on('select', function () {
+      var attachment = mediaUploader.state().get('selection').first().toJSON();
+      $('#term_image').val(attachment.url);
+      $('#term-image-preview img').attr('src', attachment.url);
+    });
+    mediaUploader.open();
+  });
+  $('.remove_image_button').click(function (e) {
+    e.preventDefault();
+    $('#term_image').val('');
+    $('#term-image-preview img').attr('src', '');
+  });
+});
+/******/ })()
+;

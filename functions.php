@@ -240,25 +240,76 @@ add_action( 'wp_enqueue_scripts', 'tailtheme_scripts' );
 add_filter( 'upload_mimes', 'allow_svg_upload' );
 
 /**
+ * Related posts metabox un editor
+ */
+
+function add_related_posts_meta_box() {
+    add_meta_box(
+        'related_posts_meta', // ID del meta box
+        __('Related Posts', 'tailtheme'), // Título
+        'render_related_posts_meta_box', // Callback que mostrará el contenido
+        'post', // Tipo de post (en este caso, posts)
+        'side', // Posición (side, advanced)
+        'default' // Prioridad
+    );
+}
+add_action('add_meta_boxes', 'add_related_posts_meta_box');
+
+function render_related_posts_meta_box($post) {
+    // Recoge los valores actuales
+    $related_posts = get_post_meta($post->ID, '_related_posts', true);
+
+    // Campo para seleccionar los posts relacionados manualmente
+    ?>
+    <label for="related_posts"><?php __('IDs de los Posts Relacionados (Separados por comas)', 'tailtheme'); ?></label>
+    <input type="text" name="related_posts" id="related_posts" value="<?php echo esc_attr($related_posts); ?>" class="widefat">
+    <?php
+}
+
+function save_related_posts_meta_box($post_id) {
+    if (array_key_exists('related_posts', $_POST)) {
+        update_post_meta(
+            $post_id,
+            '_related_posts',
+            sanitize_text_field($_POST['related_posts'])
+        );
+    }
+}
+add_action('save_post', 'save_related_posts_meta_box');
+
+/**
  * Get 3 related posts from a post category
  */
 function get_related_posts($post_id) {
-    $categories = wp_get_post_categories($post_id);
-    
-    if ($categories) {
-        $args = array(
-            'category__in' => $categories,
-            'post__not_in' => array($post_id),
-            'posts_per_page' => 3,
-            'orderby' => 'date',
-            'order' => 'DESC'
-        );
+    // Obtener posts relacionados manualmente
+    $related_posts_ids = get_post_meta($post_id, '_related_posts', true);
 
-        $related_posts = new WP_Query($args);
-        return $related_posts;
+    if ($related_posts_ids) {
+        $related_posts_ids_array = array_map('trim', explode(',', $related_posts_ids));
+        $args = array(
+            'post__in' => $related_posts_ids_array,
+            'posts_per_page' => 3,
+            'orderby' => 'post__in' // Mantener el orden dado
+        );
     } else {
-        return null;
+        // Si no hay posts manualmente seleccionados, ejecuta la lógica de posts recientes/aleatorios
+        $categories = wp_get_post_categories($post_id);
+
+        if ($categories) {
+            $args = array(
+                'category__in' => $categories,
+                'post__not_in' => array($post_id),
+                'posts_per_page' => 3,
+                'orderby' => 'date', // Puedes cambiarlo a 'rand' para aleatorios
+                'order' => 'DESC' // Orden descendente para los últimos publicados
+            );
+        } else {
+            return null; // No hay categorías en este post
+        }
     }
+
+    $related_posts = new WP_Query($args);
+    return $related_posts;
 }
 
 /**
