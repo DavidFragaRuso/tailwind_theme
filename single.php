@@ -67,7 +67,7 @@ get_header();
 					endif;
 					?>
 				</div>
-				<div class="post-navigation px-8 my-8">
+				<div class="post-navigation md:px-8 my-8">
 					<h2><?php _e( 'Post navigation', 'tailtheme' ); ?></h2>
 					<?php
 					the_post_navigation(

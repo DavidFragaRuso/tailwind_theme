@@ -8,7 +8,7 @@
     public function __construct() {
         add_action( 'customize_register', array( $this, 'register_customize_sections' ) );
         add_action( 'wp_head', array( $this, 'tailtheme_cd_option_css' ) );
-        add_shortcode( 'rrss', array( $this, 'tailtheme_render_rrss_links' ) );  
+        //add_shortcode( 'rrss', array( $this, 'tailtheme_render_rrss_links' ) );  
     }
 
     public function register_customize_sections( $wp_customize ) {
@@ -32,10 +32,9 @@
     public function sanitize_custom_option($input) {
         return ( $input === "No" ) ? "No" : "Yes";
     }
-    //Deprecated
-    //public function sanitize_custom_text($input) {
-        //return filter_var($input, FILTER_SANITIZE_STRING);
-    //}
+    public function sanitize_custom_text($input) {
+        return sanitize_text_field($input);
+    }
     public function sanitize_custom_url($input) {
         return filter_var($input, FILTER_SANITIZE_URL);
     }
