@@ -44,8 +44,8 @@ get_header();
 			
 		</div>	
 	</header>
-	<div class="block pb-8 md:container lg:grid lg:grid-flow-col lg:gap-8 lg:grid-cols-4">
-			<div class="post-content lg:col-span-3 mb-8">
+	<div class="block pb-8 md:container lg:grid lg:grid-flow-col lg:gap-8 lg:grid-cols-8">
+			<div class="post-content lg:col-span-5 mb-8">
 				<?php
 				get_template_part( 'template-parts/content', get_post_type() );
 				?>
@@ -88,7 +88,7 @@ get_header();
 					?>
 				<!--</div>-->
 			</div>
-			<div class="my-8 mx-4">
+			<div class="my-8 mx-4 lg:col-span-3">
 				<?php get_sidebar(); ?>
 			</div>
 		</div>
