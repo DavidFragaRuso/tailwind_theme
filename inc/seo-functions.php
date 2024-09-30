@@ -198,7 +198,7 @@ function add_seo_meta_tags() {
         echo '<meta name="robots" content="index, nofollow" />' . "\n";
     }
 }
-add_action('wp_head', 'add_seo_meta_tags');
+add_action('wp_head', 'add_seo_meta_tags', 1);
 
 /**
  * Add featured images on categories and tags for SEO purposes
