@@ -4,251 +4,260 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TailWind Theme - Tema de WordPress\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/montzenrrat\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2024-09-03T22:32:47+02:00\n"
+"PO-Revision-Date: 2024-09-03 22:38+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-09-03T22:32:47+02:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.10.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
 "X-Domain: tailtheme\n"
 
 #. Theme Name of the theme
 #: D:\Xampp\htdocs\montzenrrat\wp-content\themes\montzenrrat\style.css
 msgid "TailWind Theme - Tema de WordPress"
-msgstr ""
+msgstr "TailWind Theme - Tema de WordPress"
 
 #. Theme URI of the theme
 #. Author URI of the theme
 #: D:\Xampp\htdocs\montzenrrat\wp-content\themes\montzenrrat\style.css
 msgid "https://dfraga.es/"
-msgstr ""
+msgstr "https://dfraga.es/"
 
 #. Description of the theme
 #: D:\Xampp\htdocs\montzenrrat\wp-content\themes\montzenrrat\style.css
 msgid "Tema custom con Tailwind CSS"
-msgstr ""
+msgstr "Tema custom con Tailwind CSS"
 
 #. Author of the theme
 #: D:\Xampp\htdocs\montzenrrat\wp-content\themes\montzenrrat\style.css
 msgid "David Fraga"
-msgstr ""
+msgstr "David Fraga"
 
 #: 404.php:17
 msgid "Oops! That page can&rsquo;t be found."
-msgstr ""
+msgstr "¡Vaya! Esa página no se puede encontrar."
 
 #: 404.php:21
-msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgid ""
+"It looks like nothing was found at this location. Maybe try one of the links "
+"below or a search?"
 msgstr ""
 
 #: 404.php:30
 msgid "Most Used Categories"
-msgstr ""
+msgstr "Categorías mas utilizadas"
 
 #. translators: %1$s: smiley
 #: 404.php:48
 msgid "Try looking in the monthly archives. %1$s"
-msgstr ""
+msgstr "Intenta buscar en los archivos mensuales. %1$s"
 
 #: archive.php:44
 msgid "Contribuciones del autor"
-msgstr ""
+msgstr "Contribuciones del autor"
 
 #. translators: 1: title.
 #: comments.php:35
 msgid "One thought on &ldquo;%1$s&rdquo;"
-msgstr ""
+msgstr "Un comentario sobre &ldquo;%1$s&rdquo;"
 
 #. translators: 1: comment count number, 2: title.
 #: comments.php:41
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
-msgstr[0] ""
+msgstr[0] "%1$s comentario en &ldquo;%2$s&rdquo;"
 msgstr[1] ""
 
 #: comments.php:68
 msgid "Comments are closed."
-msgstr ""
+msgstr "Los comentarios están cerrados"
 
 #: functions.php:52
 msgid "Menú Principal"
-msgstr ""
+msgstr "Menú Principal"
 
 #: functions.php:118
 msgid "Principal"
-msgstr ""
+msgstr "Principal"
 
 #: functions.php:123
 msgid "P. Claro"
-msgstr ""
+msgstr "P. Claro"
 
 #: functions.php:128
 msgid "Secundario"
-msgstr ""
+msgstr "Secundario"
 
 #: functions.php:140
 msgid "Pequeña"
-msgstr ""
+msgstr "Pequeña"
 
 #: functions.php:141
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: functions.php:146
 msgid "Media"
-msgstr ""
+msgstr "Media"
 
 #: functions.php:147
 msgid "M"
-msgstr ""
+msgstr "M"
 
 #: functions.php:152
 msgid "Grande"
-msgstr ""
+msgstr "Grande"
 
 #: functions.php:153
 msgid "L"
-msgstr ""
+msgstr "L"
 
 #: functions.php:158
 msgid "Extra Grande"
-msgstr ""
+msgstr "Extra Grande"
 
 #: functions.php:159
 msgid "XL"
-msgstr ""
+msgstr "XL"
 
 #: functions.php:199
 msgid "Sidebar"
-msgstr ""
+msgstr "Barra lateral"
 
-#: functions.php:201
-#: functions.php:211
-#: functions.php:221
-#: functions.php:230
+#: functions.php:201 functions.php:211 functions.php:221 functions.php:230
 msgid "Add widgets here."
-msgstr ""
+msgstr "Añade tus Widgets aquí."
 
 #: functions.php:209
 msgid "Footer Col Left"
-msgstr ""
+msgstr "Columna izquierda del Footer"
 
 #: functions.php:219
 msgid "Footer Col Center"
-msgstr ""
+msgstr "Columna central del Footer"
 
 #: functions.php:228
 msgid "Footer Col Right"
-msgstr ""
+msgstr "Columna derecha del footer"
 
 #: inc/breadcrumbs.php:18
 msgid "Inicio"
-msgstr ""
+msgstr "Inicio"
 
-#: inc/breadcrumbs.php:84
-#: inc/breadcrumbs.php:88
+#: inc/breadcrumbs.php:84 inc/breadcrumbs.php:88
 msgid "Resultados de búsqueda para \"%s\""
-msgstr ""
+msgstr "Resultados de búsqueda para \"%s\""
 
 #. translators: %s: post date.
 #: inc/template-tags.php:30
 msgctxt "post date"
 msgid "Posted on %s"
-msgstr ""
+msgstr "Publicado el %s"
 
 #. translators: %s: post author.
 #: inc/template-tags.php:46
 msgctxt "post author"
 msgid "by %s"
-msgstr ""
+msgstr "por %s"
 
 #. translators: used between list items, there is a space after the comma
 #: inc/template-tags.php:63
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #. translators: 1: list of categories.
 #: inc/template-tags.php:66
 msgid "Posted in %1$s"
-msgstr ""
+msgstr "Publicado en %1$s"
 
 #. translators: used between list items, there is a space after the comma
 #: inc/template-tags.php:70
 msgctxt "list item separator"
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #. translators: 1: list of tags.
 #: inc/template-tags.php:73
 msgid "Tagged %1$s"
-msgstr ""
+msgstr "Etiquetado %1$c"
 
 #. translators: %s: post title
 #: inc/template-tags.php:83
 msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
-msgstr ""
+msgstr "Deja un comentario<span class=\"screen-reader-text\"> en %s</span>"
 
 #. translators: %s: Name of current post. Only visible to screen readers
-#: inc/template-tags.php:100
-#: template-parts/content-page.php:45
+#: inc/template-tags.php:100 template-parts/content-page.php:45
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
-msgstr ""
+msgstr "Editar <span class=\"screen-reader-text\">%s</span>"
 
 #: inc/users.php:4
 msgid "Información Biográfica Completa"
-msgstr ""
+msgstr "Información Biográfica Completa"
 
 #: inc/users.php:16
 msgid "Añade una descripción biográfica completa utilizando el editor."
-msgstr ""
+msgstr "Añade una descripción biográfica completa utilizando el editor."
 
 #. translators: %s: search query.
 #: search.php:21
 msgid "Search Results for: %s"
-msgstr ""
+msgstr "Resultados de búsqueda para: %s"
 
 #: single.php:39
 msgid "Related Posts"
-msgstr ""
+msgstr "Artículos similares"
 
 #: single.php:52
 msgid "Post navigation"
-msgstr ""
+msgstr "Navegación de entradas"
 
 #: single.php:56
 msgid "Previous:"
-msgstr ""
+msgstr "Anterior:"
 
 #: single.php:57
 msgid "Next:"
-msgstr ""
+msgstr "Siguiente:"
 
 #: template-parts/content-none.php:14
 msgid "Nothing Found"
-msgstr ""
+msgstr "No se ha encontrado nada"
 
 #. translators: 1: link to WP admin new post page.
 #: template-parts/content-none.php:24
-msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr ""
+"Preparado para publicar tu primera entrada? <a href=\"%1$s\">Empieza aqui</"
+"a>."
 
 #: template-parts/content-none.php:37
-msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
 msgstr ""
+"Lo sentimos, pero no hemos encontrado resultados para tus términos de "
+"búsqueda. Por favor, inténtalo de nuevo con otros términos."
 
 #: template-parts/content-none.php:44
-msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
 msgstr ""
+"Parece que no hemos encontrado lo que estás buscando. Quiza la búsqueda "
+"pueda ayudar."
 
-#: template-parts/content-page.php:31
-#: template-parts/content.php:57
+#: template-parts/content-page.php:31 template-parts/content.php:57
 msgid "Pages:"
-msgstr ""
+msgstr "Páginas:"
 
 #. translators: %s: Name of current post. Only visible to screen readers
 #: template-parts/content.php:44
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
-msgstr ""
+msgstr "Continua leyendo<span class=\"screen-reader-text\"> \"%s\"</span>"
