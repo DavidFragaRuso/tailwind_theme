@@ -1,12 +1,11 @@
 <?php
 /**
- * Add metaboxes on pages, posts, custom posts if needed for seo purposes - Meta title and meta description
- * (id, title, callback, screen, context, priority, callback args)
+ * Añadir metaboxes de SEO en páginas, entradas y tipos de post personalizados.
  */
 
 add_action( 'add_meta_boxes', 'register_seo_metaboxes' );
 function register_seo_metaboxes() {
-    //Title Meta Box
+    // Meta Box para el título SEO
     add_meta_box(
         'seo_meta_title',
         __('SEO Meta Title', 'tailtheme'),
@@ -15,16 +14,18 @@ function register_seo_metaboxes() {
         'normal',
         'high'
     );
-    //Description Meta Box
+    
+    // Meta Box para la descripción SEO
     add_meta_box(
         'seo_meta_description',
         __('SEO Meta Description', 'tailtheme'),
         'seo_meta_description_callback',
-        ['post', 'page'], // Esto añade la metabox a posts y páginas
+        ['post', 'page'],
         'normal',
         'high'
     );
-    //Index / Follow metaboxes
+    
+    // Meta Box para la opción de no indexar/seguir
     add_meta_box(
         'seo_meta_robots',
         __( 'SEO Meta Robots', 'tailtheme' ),
@@ -39,7 +40,7 @@ function seo_meta_title_callback($post) {
     $meta_title = get_post_meta($post->ID, '_seo_meta_title', true);
     ?>
     <input type="text" name="seo_meta_title" value="<?php echo esc_attr($meta_title); ?>" maxlength="60" style="width:100%;" />
-    <p>Recommended length: 50-60 characters.</p>
+    <p>Longitud recomendada: 50-60 caracteres.</p>
     <?php
 }
 
@@ -47,12 +48,12 @@ function seo_meta_description_callback($post) {
     $meta_description = get_post_meta($post->ID, '_seo_meta_description', true);
     ?>
     <textarea name="seo_meta_description" maxlength="160" style="width:100%; height:100px;"><?php echo esc_textarea($meta_description); ?></textarea>
-    <p>Recommended length: 150-160 characters.</p>
+    <p>Longitud recomendada: 150-160 caracteres.</p>
     <?php
 }
 
 function seo_meta_robots_callback( $post ) {
-    // Recuperar el valor actual de los meta fields
+    // Recuperar los valores de los meta fields
     $noindex = get_post_meta($post->ID, '_seo_noindex', true);
     $nofollow = get_post_meta($post->ID, '_seo_nofollow', true);
 
@@ -70,12 +71,12 @@ function seo_meta_robots_callback( $post ) {
 }
 
 function save_seo_meta_boxes($post_id) {
-    // Verifi if is an auto-save
+    // Evitar auto-guardado
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
         return;
     }
 
-    // Check user capabilities
+    // Verificar permisos del usuario
     if (isset($_POST['post_type']) && $_POST['post_type'] == 'page') {
         if (!current_user_can('edit_page', $post_id)) {
             return;
@@ -84,23 +85,24 @@ function save_seo_meta_boxes($post_id) {
         return;
     }
 
-    // Save meta Title
+    // Guardar meta título
     if (isset($_POST['seo_meta_title'])) {
         update_post_meta($post_id, '_seo_meta_title', sanitize_text_field($_POST['seo_meta_title']));
     }
 
-    // Save meta description
+    // Guardar meta descripción
     if (isset($_POST['seo_meta_description'])) {
         update_post_meta($post_id, '_seo_meta_description', sanitize_textarea_field($_POST['seo_meta_description']));
     }
 
+    // Guardar 'noindex'
     if (isset($_POST['seo_noindex'])) {
         update_post_meta($post_id, '_seo_noindex', '1');
     } else {
         delete_post_meta($post_id, '_seo_noindex');
     }
 
-    // Verificar si se ha enviado el campo 'nofollow'
+    // Guardar 'nofollow'
     if (isset($_POST['seo_nofollow'])) {
         update_post_meta($post_id, '_seo_nofollow', '1');
     } else {
@@ -109,7 +111,7 @@ function save_seo_meta_boxes($post_id) {
 }
 add_action('save_post', 'save_seo_meta_boxes');
 
-// Añadir campos 'noindex' y 'nofollow' a categorías y etiquetas
+// Añadir campos a categorías y etiquetas
 function add_seo_term_fields() {
     ?>
     <div class="form-field">
@@ -125,7 +127,7 @@ function add_seo_term_fields() {
 add_action('category_add_form_fields', 'add_seo_term_fields');
 add_action('post_tag_add_form_fields', 'add_seo_term_fields');
 
-// Editar los campos para categorías y etiquetas
+// Editar los campos de categorías y etiquetas
 function edit_seo_term_fields($term) {
     $noindex = get_term_meta($term->term_id, '_seo_noindex', true);
     $nofollow = get_term_meta($term->term_id, '_seo_nofollow', true);
@@ -143,7 +145,7 @@ function edit_seo_term_fields($term) {
 add_action('category_edit_form_fields', 'edit_seo_term_fields');
 add_action('post_tag_edit_form_fields', 'edit_seo_term_fields');
 
-// Guardar los datos al actualizar categorías y etiquetas
+// Guardar datos al actualizar categorías y etiquetas
 function save_seo_term_fields($term_id) {
     if (isset($_POST['seo_noindex'])) {
         update_term_meta($term_id, '_seo_noindex', '1');
@@ -162,12 +164,12 @@ add_action('edited_category', 'save_seo_term_fields');
 add_action('created_post_tag', 'save_seo_term_fields');
 add_action('edited_post_tag', 'save_seo_term_fields');
 
-/**
- * Show Metadata on front-end
- */
+// Mostrar metadatos SEO en el front-end
 function add_seo_meta_tags() {
-    if (is_single() || is_page()) {
-        global $post;
+    global $post;
+
+    // Optimización: Recuperar los metadatos solo si la página o entrada actual requiere meta etiquetas.
+    if (is_singular(['post', 'page'])) {
         $meta_title = get_post_meta($post->ID, '_seo_meta_title', true);
         $meta_description = get_post_meta($post->ID, '_seo_meta_description', true);
 
@@ -178,23 +180,21 @@ function add_seo_meta_tags() {
         if ($meta_description) {
             echo '<meta name="description" content="' . esc_attr($meta_description) . '">' . "\n";
         }
-    }
 
-    if (is_singular('post') || is_singular('page')) {
-        $noindex = get_post_meta(get_the_ID(), '_seo_noindex', true);
-        $nofollow = get_post_meta(get_the_ID(), '_seo_nofollow', true);
+        $noindex = get_post_meta($post->ID, '_seo_noindex', true);
+        $nofollow = get_post_meta($post->ID, '_seo_nofollow', true);
     } elseif (is_category() || is_tag()) {
         $term = get_queried_object();
         $noindex = get_term_meta($term->term_id, '_seo_noindex', true);
         $nofollow = get_term_meta($term->term_id, '_seo_nofollow', true);
     }
 
-    // Generar la etiqueta meta robots
-    if ($noindex == '1' && $nofollow == '1') {
+    // Etiquetas meta robots
+    if (isset($noindex) && $noindex == '1' && isset($nofollow) && $nofollow == '1') {
         echo '<meta name="robots" content="noindex, nofollow" />' . "\n";
-    } elseif ($noindex == '1') {
+    } elseif (isset($noindex) && $noindex == '1') {
         echo '<meta name="robots" content="noindex, follow" />' . "\n";
-    } elseif ($nofollow == '1') {
+    } elseif (isset($nofollow) && $nofollow == '1') {
         echo '<meta name="robots" content="index, nofollow" />' . "\n";
     }
 }
