@@ -99,19 +99,57 @@ class Custom_SEO_Meta {
     }
 
     public function add_seo_meta_tags() {
+        $noindex = '';
+        $nofollow = '';
+        $og_image = '';
+
         if (is_singular('post') || is_singular('page')) {
             global $post;
             $meta_title = get_post_meta($post->ID, '_seo_meta_title', true);
             $meta_description = get_post_meta($post->ID, '_seo_meta_description', true);
             $noindex = get_post_meta($post->ID, '_seo_noindex', true);
             $nofollow = get_post_meta($post->ID, '_seo_nofollow', true);
+            $og_image = get_the_post_thumbnail_url($post->ID);
 
+            //Meta title
             if ($meta_title) {
                 echo '<meta name="title" content="' . esc_attr($meta_title) . '">' . "\n";
             }
 
+            //Meta description
             if ($meta_description) {
                 echo '<meta name="description" content="' . esc_attr($meta_description) . '">' . "\n";
+            }
+
+            //Open Graph Meta Tags
+            echo '<meta property="og:locale" content="es_ES" />' . "\n";
+            if (is_singular('post')) {
+                echo '<meta property="og:type" content="article" />' . "\n"; // Posts
+            } elseif (is_page()) {
+                echo '<meta property="og:type" content="website" />' . "\n"; // Static pages
+            }
+            echo '<meta property="og:title" content="' . esc_attr($meta_title) . '" />' . "\n";
+            echo '<meta property="og:description" content="' . esc_attr($meta_description) . '" />' . "\n";
+            echo '<meta property="og:url" content="' . get_permalink() . '" />' . "\n";
+            if ($og_image) {
+                echo '<meta property="og:image" content="' . esc_url($og_image) . '" />' . "\n";
+            }
+
+             // Twitter Cards Meta Tags
+            echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
+            echo '<meta name="twitter:title" content="' . esc_attr($meta_title) . '" />' . "\n";
+            echo '<meta name="twitter:description" content="' . esc_attr($meta_description) . '" />' . "\n";
+            if ($og_image) {
+                echo '<meta name="twitter:image" content="' . esc_url($og_image) . '" />' . "\n";
+            }
+
+            // Robots Meta Tags
+            if ($noindex == '1' && $nofollow == '1') {
+                echo '<meta name="robots" content="noindex, nofollow" />' . "\n";
+            } elseif ($noindex == '1') {
+                echo '<meta name="robots" content="noindex, follow" />' . "\n";
+            } elseif ($nofollow == '1') {
+                echo '<meta name="robots" content="index, nofollow" />' . "\n";
             }
         }
 
@@ -119,14 +157,15 @@ class Custom_SEO_Meta {
             $term = get_queried_object();
             $noindex = get_term_meta($term->term_id, '_seo_noindex', true);
             $nofollow = get_term_meta($term->term_id, '_seo_nofollow', true);
-        }
 
-        if ($noindex == '1' && $nofollow == '1') {
-            echo '<meta name="robots" content="noindex, nofollow" />' . "\n";
-        } elseif ($noindex == '1') {
-            echo '<meta name="robots" content="noindex, follow" />' . "\n";
-        } elseif ($nofollow == '1') {
-            echo '<meta name="robots" content="index, nofollow" />' . "\n";
+            // Robots Meta Tags for Categories and Tags
+            if ($noindex == '1' && $nofollow == '1') {
+                echo '<meta name="robots" content="noindex, nofollow" />' . "\n";
+            } elseif ($noindex == '1') {
+                echo '<meta name="robots" content="noindex, follow" />' . "\n";
+            } elseif ($nofollow == '1') {
+                echo '<meta name="robots" content="index, nofollow" />' . "\n";
+            }
         }
     }
 }
