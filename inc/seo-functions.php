@@ -3,6 +3,7 @@ class Custom_SEO_Meta {
     
     public function __construct() {
         add_action( 'add_meta_boxes', [ $this, 'register_seo_metaboxes' ] );
+        add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_custom_admin_scripts' ] );
         add_action( 'save_post', [ $this, 'save_seo_meta_boxes' ] );
         add_action( 'category_add_form_fields', [ $this, 'add_seo_term_fields' ] );
         add_action( 'post_tag_add_form_fields', [ $this, 'add_seo_term_fields' ] );
@@ -15,9 +16,15 @@ class Custom_SEO_Meta {
         add_action( 'wp_head', [ $this, 'add_seo_meta_tags' ], 1 ); // Prioridad 1
     }
 
+    public function enqueue_custom_admin_scripts() {
+        wp_enqueue_media();
+        wp_enqueue_script( 'custom-meta-box-image', get_template_directory_uri() . '/public/js/meta-box-image.js', array('jquery'), null, true );
+    }
+
     public function register_seo_metaboxes() {
         add_meta_box( 'seo_meta_title', __( 'SEO Meta Title', 'tailtheme' ), [ $this, 'seo_meta_title_callback' ], ['post', 'page'], 'normal', 'high' );
         add_meta_box( 'seo_meta_description', __( 'SEO Meta Description', 'tailtheme' ), [ $this, 'seo_meta_description_callback' ], ['post', 'page'], 'normal', 'high' );
+        add_meta_box( 'seo_meta_image', __( 'SEO Meta Image', 'tailtheme' ), [ $this, 'seo_meta_image_callback' ], ['post', 'page'], 'normal', 'high' );
         add_meta_box( 'seo_meta_robots', __( 'SEO Meta Robots', 'tailtheme' ), [ $this, 'seo_meta_robots_callback' ], ['post', 'page'], 'normal', 'high' );
     }
 
@@ -31,6 +38,15 @@ class Custom_SEO_Meta {
         $meta_description = get_post_meta($post->ID, '_seo_meta_description', true);
         echo '<textarea name="seo_meta_description" maxlength="160" style="width:100%; height:100px;">' . esc_textarea($meta_description) . '</textarea>';
         echo '<p>Recommended length: 150-160 characters.</p>';
+    }
+
+    public function seo_meta_image_callback($post) {
+        wp_nonce_field(basename(__FILE__), 'seo_meta_image_nonce');
+        $meta_image = get_post_meta($post->ID, '_seo_meta_image', true);
+        echo '<label for="seo_meta_image">' . __('Upload an alternative image for SEO (JPEG/PNG). 1200x630px recommended', 'textdomain') . '</label>';
+        echo '<input type="text" name="seo_meta_image" id="seo_meta_image" value="' . esc_attr($meta_image) . '" style="width:100%;" />';
+        echo '<input type="button" class="button" id="seo_meta_image_button" value="' . __('Select Image', 'tailtheme') . '" />';
+        echo '<div><img id="seo_meta_image_preview" src="' . esc_url($meta_image) . '" style="max-width:100%; margin-top:10px;" /></div>';
     }
 
     public function seo_meta_robots_callback($post) {
@@ -56,6 +72,13 @@ class Custom_SEO_Meta {
 
         if (isset($_POST['seo_meta_description'])) {
             update_post_meta($post_id, '_seo_meta_description', sanitize_textarea_field($_POST['seo_meta_description']));
+        }
+
+        if (!isset($_POST['seo_meta_image_nonce']) || !wp_verify_nonce($_POST['seo_meta_image_nonce'], basename(__FILE__))) return;
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+        
+        if (isset($_POST['seo_meta_image'])) {
+            update_post_meta($post_id, '_seo_meta_image', esc_url_raw($_POST['seo_meta_image']));
         }
 
         if (isset($_POST['seo_noindex'])) {
@@ -175,7 +198,6 @@ new Custom_SEO_Meta();
 /**
  * Add featured images on categories and tags for SEO purposes
  */
-// Agregar campo de imagen destacada con vista previa en la pantalla de edición de categorías/etiquetas
 function add_term_image_field() {
     ?>
     <div class="form-field term-group">
@@ -184,21 +206,20 @@ function add_term_image_field() {
         <div id="term-image-preview" style="margin-top:10px;">
             <img src="" alt="" style="max-width:100%; height:auto;" />
         </div>
-        <button class="upload_image_button button"><?php _e('Subir/Seleccionar imagen', 'tailtheme'); ?></button>
-        <button class="remove_image_button button"><?php _e('Eliminar imagen', 'tailtheme'); ?></button>
+        <button class="upload_image_button button"><?php _e('Upload / Select Image', 'tailtheme'); ?></button>
+        <button class="remove_image_button button"><?php _e('Delete image', 'tailtheme'); ?></button>
     </div>
     <?php
 }
-add_action('category_add_form_fields', 'add_term_image_field');
-add_action('post_tag_add_form_fields', 'add_term_image_field');
+add_action('category_add_form_fields', 'add_term_image_field', 10);
+add_action('post_tag_add_form_fields', 'add_term_image_field', 10);
 
-// Editar campo con vista previa en la edición de categorías/etiquetas
 function edit_term_image_field($term) {
     $term_image = get_term_meta($term->term_id, 'term_image', true);
     ?>
     <tr class="form-field term-group">
         <th scope="row" valign="top">
-            <label for="term_image"><?php _e('Imagen destacada', 'tailtheme'); ?></label>
+            <label for="term_image"><?php _e('Featured image', 'tailtheme'); ?></label>
         </th>
         <td>
             <input type="hidden" id="term_image" name="term_image" value="<?php echo esc_attr($term_image); ?>" />
@@ -209,18 +230,18 @@ function edit_term_image_field($term) {
                     <img src="" alt="" style="max-width:100%; height:auto;" />
                 <?php } ?>
             </div>
-            <button class="upload_image_button button"><?php _e('Subir/Seleccionar imagen', 'tailtheme'); ?></button>
-            <button class="remove_image_button button"><?php _e('Eliminar imagen', 'tailtheme'); ?></button>
+            <button class="upload_image_button button"><?php _e('Upload / Select Image', 'tailtheme'); ?></button>
+            <button class="remove_image_button button"><?php _e('Delete image', 'tailtheme'); ?></button>
         </td>
     </tr>
     <?php
 }
-add_action('category_edit_form_fields', 'edit_term_image_field');
-add_action('post_tag_edit_form_fields', 'edit_term_image_field');
+add_action('category_edit_form_fields', 'edit_term_image_field', 10);
+add_action('post_tag_edit_form_fields', 'edit_term_image_field', 10);
 
 function save_term_image_field($term_id) {
-    if(isset($_POST['term_image'])){
-        update_term_meta($term_id, 'term_image', $_POST['term_image']);
+    if (isset($_POST['term_image'])) {
+        update_term_meta($term_id, 'term_image', sanitize_text_field($_POST['term_image']));
     }
 }
 add_action('created_category', 'save_term_image_field', 10, 2);
@@ -229,7 +250,7 @@ add_action('created_post_tag', 'save_term_image_field', 10, 2);
 add_action('edited_post_tag', 'save_term_image_field', 10, 2);
 
 function enqueue_term_media_uploader() {
-    if(isset($_GET['taxonomy'])) {
+    if (isset($_GET['taxonomy'])) {
         wp_enqueue_media();
         wp_enqueue_script('term_image_script', get_template_directory_uri() . '/public/js/category-image.js', array('jquery'), null, true);
     }
