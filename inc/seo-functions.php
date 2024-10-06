@@ -13,7 +13,7 @@ class Custom_SEO_Meta {
         add_action( 'edited_category', [ $this, 'save_seo_term_fields' ] );
         add_action( 'created_post_tag', [ $this, 'save_seo_term_fields' ] );
         add_action( 'edited_post_tag', [ $this, 'save_seo_term_fields' ] );
-        add_action( 'wp_head', [ $this, 'add_seo_meta_tags' ], 1 ); // Prioridad 1
+        add_action( 'wp_head', [ $this, 'add_seo_meta_tags' ], 1 ); // Priority 1
     }
 
     public function enqueue_custom_admin_scripts() {
@@ -43,10 +43,16 @@ class Custom_SEO_Meta {
     public function seo_meta_image_callback($post) {
         wp_nonce_field(basename(__FILE__), 'seo_meta_image_nonce');
         $meta_image = get_post_meta($post->ID, '_seo_meta_image', true);
-        echo '<label for="seo_meta_image">' . __('Upload an alternative image for SEO (JPEG/PNG). 1200x630px recommended', 'textdomain') . '</label>';
-        echo '<input type="text" name="seo_meta_image" id="seo_meta_image" value="' . esc_attr($meta_image) . '" style="width:100%;" />';
-        echo '<input type="button" class="button" id="seo_meta_image_button" value="' . __('Select Image', 'tailtheme') . '" />';
-        echo '<div><img id="seo_meta_image_preview" src="' . esc_url($meta_image) . '" style="max-width:100%; margin-top:10px;" /></div>';
+        ?>
+        <input type="hidden" id="selected_image" name="selected_image" value="<?php echo esc_attr($meta_image); ?>" />
+        <label for="seo_meta_image">Seleccionar imagen SEO<?php __('Select Image for Open Graph (1200x630px recommended)', 'tailtheme'); ?></label>
+        <input type="text" name="seo_metabox_image" id="seo_meta_image" value="<?php echo esc_attr($meta_image ? $meta_image : ''); ?>" style="width:100%;" />
+        <input type="button" class="button" id="meta_image_button" value="<?php _e( 'Select / Upload image', 'tailtheme' ); ?>" />
+        <input type="button" class="button" id="remove_meta_image_button" value="<?php _e('Delete image', 'tailtheme'); ?>" style="display: <?php echo $meta_image ? 'inline-block' : 'none'; ?>;" />
+        <div>
+            <img id="seo_meta_image_preview" src="<?php echo esc_attr($meta_image ? $meta_image : ''); ?>" style="max-width:100%; margin-top:10px;" />
+        </div>
+        <?php
     }
 
     public function seo_meta_robots_callback($post) {
@@ -58,6 +64,14 @@ class Custom_SEO_Meta {
     }
 
     public function save_seo_meta_boxes($post_id) {
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    
+        if (isset($_POST['post_type']) && $_POST['post_type'] == 'page') {
+            if (!current_user_can('edit_page', $post_id)) return;
+        } else {
+            if (!current_user_can('edit_post', $post_id)) return;
+        }
+
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
 
         if (isset($_POST['post_type']) && $_POST['post_type'] == 'page') {
@@ -75,10 +89,12 @@ class Custom_SEO_Meta {
         }
 
         if (!isset($_POST['seo_meta_image_nonce']) || !wp_verify_nonce($_POST['seo_meta_image_nonce'], basename(__FILE__))) return;
-        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-        
-        if (isset($_POST['seo_meta_image'])) {
-            update_post_meta($post_id, '_seo_meta_image', esc_url_raw($_POST['seo_meta_image']));
+
+        if (isset($_POST['selected_image'])) {
+            $seo_meta_image = sanitize_text_field($_POST['selected_image']);
+            update_post_meta($post_id, '_seo_meta_image', $seo_meta_image);
+        } else {
+            delete_post_meta($post_id, '_seo_meta_image');
         }
 
         if (isset($_POST['seo_noindex'])) {
@@ -92,7 +108,7 @@ class Custom_SEO_Meta {
         } else {
             delete_post_meta($post_id, '_seo_nofollow');
         }
-    }
+    }    
 
     public function add_seo_term_fields() {
         echo '<div class="form-field"><label for="seo_noindex">' . __('No indexar esta categoría/etiqueta', 'text-domain') . '</label><input type="checkbox" name="seo_noindex" id="seo_noindex" value="1" /></div>';

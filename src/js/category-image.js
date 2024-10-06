@@ -4,6 +4,8 @@ jQuery(document).ready(function($) {
     $('.upload_image_button').on('click', function(e) {
         e.preventDefault();
 
+        console.log('Botón de selección de imagen clicado'); // Para depuración
+
         var $button = $(this); // Guardar referencia al botón clicado
         if (mediaUploader) {
             mediaUploader.open();

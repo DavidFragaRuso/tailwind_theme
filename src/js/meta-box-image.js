@@ -1,30 +1,35 @@
-jQuery(document).ready(function($){
+jQuery(document).ready(function ($) {
     var mediaUploader;
 
-    $('#seo_meta_image_button').on('click', function(e) {
-        e.preventDefault();
-        // If the uploader object has already been created, reopen the dialog
+    $('#meta_image_button').on('click', function (event) {
+        event.preventDefault();
+        console.log('Botón de selección de imagen clicado'); // Para depuración
+
+        // Si ya existe una ventana de selección de archivos abierta, ciérrala
         if (mediaUploader) {
             mediaUploader.open();
             return;
         }
-        // Extend the wp.media object
-        mediaUploader = wp.media.frames.file_frame = wp.media({
-            title: 'Choose Image',
+
+        // Crear una nueva ventana de selección de archivos
+        mediaUploader = wp.media({
+            title: 'Seleccionar o Subir Imagen',
             button: {
-                text: 'Choose Image'
+                text: 'Usar esta imagen'
             },
             multiple: false
         });
 
-        // When an image is selected, grab the URL and set it as the value of the input
-        mediaUploader.on('select', function() {
+        // Al seleccionar la imagen
+        mediaUploader.on('select', function () {
             var attachment = mediaUploader.state().get('selection').first().toJSON();
-            $('#seo_meta_image').val(attachment.url);
-            $('#seo_meta_image_preview').attr('src', attachment.url);
+            console.log(attachment);
+            $('#selected_image').val(attachment.url); // Guarda la URL en el campo oculto
+            console.log('URL de la imagen seleccionada: ' + attachment.url); // Para depuración
+            $('#seo_meta_image_preview').attr('src', attachment.url); // Actualiza la vista previa
         });
 
-        // Open the uploader dialog
+        // Abre la ventana de selección
         mediaUploader.open();
     });
 });
