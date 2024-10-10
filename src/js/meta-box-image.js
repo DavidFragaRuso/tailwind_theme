@@ -3,7 +3,7 @@ jQuery(document).ready(function ($) {
 
     $('#meta_image_button').on('click', function (event) {
         event.preventDefault();
-        console.log('Botón de selección de imagen clicado'); // Para depuración
+        //console.log('Botón de selección de imagen clicado'); // Para depuración
 
         // Si ya existe una ventana de selección de archivos abierta, ciérrala
         if (mediaUploader) {
@@ -25,7 +25,7 @@ jQuery(document).ready(function ($) {
             var attachment = mediaUploader.state().get('selection').first().toJSON();
             console.log(attachment);
             $('#selected_image').val(attachment.url); // Guarda la URL en el campo oculto
-            console.log('URL de la imagen seleccionada: ' + attachment.url); // Para depuración
+            //console.log('URL de la imagen seleccionada: ' + attachment.url); // Para depuración
             $('#seo_meta_image_preview').attr('src', attachment.url); // Actualiza la vista previa
         });
 

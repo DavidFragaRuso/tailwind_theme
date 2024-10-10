@@ -45,7 +45,7 @@ class Custom_SEO_Meta {
         $meta_image = get_post_meta($post->ID, '_seo_meta_image', true);
         ?>
         <input type="hidden" id="selected_image" name="selected_image" value="<?php echo esc_attr($meta_image); ?>" />
-        <label for="seo_meta_image">Seleccionar imagen SEO<?php __('Select Image for Open Graph (1200x630px recommended)', 'tailtheme'); ?></label>
+        <label for="seo_meta_image"><?php _e('Select Image for Open Graph (1200x630px recommended)', 'tailtheme'); ?></label>
         <input type="text" name="seo_metabox_image" id="seo_meta_image" value="<?php echo esc_attr($meta_image ? $meta_image : ''); ?>" style="width:100%;" />
         <input type="button" class="button" id="meta_image_button" value="<?php _e( 'Select / Upload image', 'tailtheme' ); ?>" />
         <input type="button" class="button" id="remove_meta_image_button" value="<?php _e('Delete image', 'tailtheme'); ?>" style="display: <?php echo $meta_image ? 'inline-block' : 'none'; ?>;" />
@@ -137,6 +137,40 @@ class Custom_SEO_Meta {
         }
     }
 
+    public function get_twitter_handle($url) {
+        //Verify url is not empty
+        if( empty($url) ) { return ''; }
+
+        //Pase url by components
+        $parsed_url = parse_url($url);
+
+        //Verify correct host (optional)
+        if (!isset($parsed_url['host']) || !in_array($parsed_url['host'], ['x.com', 'twitter.com'])) {
+            return '';
+        }
+
+        //Get url route
+        $path = isset($parsed_url['path']) ? trim($parsed_url['path'], '/') : '';
+
+        //if route doesn't exist return empty string
+        if (empty($path)) { return ''; }
+
+        //Split path by '/' to handle possible subdirectories
+        $segments = explode('/', $path);
+
+        //Take the first segment as the username
+        $username = $segments[0];
+
+        //Verify that the username is not empty and does not contain invalid characters
+        if (empty($username) || preg_match('/[^A-Za-z0-9_]/', $username)) {
+            return '';
+        }
+
+        // Return username with '@' at the beginning
+        return '@' . $username;
+
+    }
+
     public function add_seo_meta_tags() {
         $noindex = '';
         $nofollow = '';
@@ -148,7 +182,10 @@ class Custom_SEO_Meta {
             $meta_description = get_post_meta($post->ID, '_seo_meta_description', true);
             $noindex = get_post_meta($post->ID, '_seo_noindex', true);
             $nofollow = get_post_meta($post->ID, '_seo_nofollow', true);
-            $og_image = get_the_post_thumbnail_url($post->ID);
+            $og_image = get_post_meta($post->ID, '_seo_meta_image', true);
+            $x_handle = get_theme_mod('twitter-callout-display');
+
+            $twitter_handle = $this->get_twitter_handle($x_handle);
 
             //Meta title
             if ($meta_title) {
@@ -159,6 +196,9 @@ class Custom_SEO_Meta {
             if ($meta_description) {
                 echo '<meta name="description" content="' . esc_attr($meta_description) . '">' . "\n";
             }
+
+            // Canonical Tag
+            echo '<link rel="canonical" href="' . esc_url(get_permalink()) . '" />' . "\n";
 
             //Open Graph Meta Tags
             echo '<meta property="og:locale" content="es_ES" />' . "\n";
@@ -174,12 +214,15 @@ class Custom_SEO_Meta {
                 echo '<meta property="og:image" content="' . esc_url($og_image) . '" />' . "\n";
             }
 
-             // Twitter Cards Meta Tags
+            // Twitter Cards Meta Tags
             echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
             echo '<meta name="twitter:title" content="' . esc_attr($meta_title) . '" />' . "\n";
             echo '<meta name="twitter:description" content="' . esc_attr($meta_description) . '" />' . "\n";
             if ($og_image) {
                 echo '<meta name="twitter:image" content="' . esc_url($og_image) . '" />' . "\n";
+            }
+            if ($twitter_handle) {
+                echo '<meta name="twitter:site" content="' . esc_attr($twitter_handle) . '" />' . "\n";
             }
 
             // Robots Meta Tags
