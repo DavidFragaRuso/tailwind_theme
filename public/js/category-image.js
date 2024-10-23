@@ -1,1 +1,38 @@
-jQuery(document).ready((function(e){var t;e(".upload_image_button").on("click",(function(a){a.preventDefault(),console.log("Botón de selección de imagen clicado");var n=e(this);t||(t=wp.media({title:"Seleccionar imagen destacada",button:{text:"Usar esta imagen"},multiple:!1})).on("select",(function(){var e=t.state().get("selection").first().toJSON();n.parent().find("#term_image").val(e.url),n.parent().find("#term-image-preview img").attr("src",e.url)})),t.open()})),e(".remove_image_button").on("click",(function(t){t.preventDefault();var a=e(this);a.parent().find("#term_image").val(""),a.parent().find("#term-image-preview img").attr("src","")}))}));
+/******/ (() => { // webpackBootstrap
+/*!**********************************!*\
+  !*** ./src/js/category-image.js ***!
+  \**********************************/
+jQuery(document).ready(function ($) {
+  var mediaUploader;
+  $('.upload_image_button').on('click', function (e) {
+    e.preventDefault();
+    console.log('Botón de selección de imagen clicado'); // Para depuración
+
+    var $button = $(this); // Guardar referencia al botón clicado
+    if (mediaUploader) {
+      mediaUploader.open();
+      return;
+    }
+    mediaUploader = wp.media({
+      title: 'Seleccionar imagen destacada',
+      button: {
+        text: 'Usar esta imagen'
+      },
+      multiple: false
+    });
+    mediaUploader.on('select', function () {
+      var attachment = mediaUploader.state().get('selection').first().toJSON();
+      $button.parent().find('#term_image').val(attachment.url);
+      $button.parent().find('#term-image-preview img').attr('src', attachment.url);
+    });
+    mediaUploader.open();
+  });
+  $('.remove_image_button').on('click', function (e) {
+    e.preventDefault();
+    var $button = $(this); // Guardar referencia al botón clicado
+    $button.parent().find('#term_image').val('');
+    $button.parent().find('#term-image-preview img').attr('src', '');
+  });
+});
+/******/ })()
+;
