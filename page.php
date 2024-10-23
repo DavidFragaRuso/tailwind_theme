@@ -49,6 +49,27 @@ get_header();
 				
 	</header>
 	<?php	
+	} else {
+		?>
+		<header class="web-hero bg-gray-400 shadow-md">
+			<div class="container flex">
+				<div class="hero-content">
+					<h1>Recursos de Diseño, Desarrollo Web y SEO para Pymes y Emprendedores</h1>
+					<p class="text-lg">Me llamo David Fraga y tengo más de 10 años de experiencia en proyectos de Diseño, Desarrollo Web con wordPress y optimización SEO.</p>
+					<a class="btn-primary inline-block mb-16 bg-primary text-white hover:text-secondary p-6">Saber más sobre mí.</a>
+				</div>
+			</div>
+		</header>
+		<div class="container py-8">
+			<h2>Estamos en 2024 y toda empresa y emprendedor deberia tener una web.</h2>
+			<p>En 2013 inicié esta web de manera local en mi ordenador como registro de lo que aprendia. Con el tiempo la puse online para tenerla como manual de consulta, y la utilizé para dar soporte a mis clientes mediante entradas en el blog resolviendo problemas o dudas comunes a mas de uno.</p>
+			<p>Este 2024 me he decidido a actualizar los contenidos y ponerlos a disposición de todo emprendedor que quiera iniciar o mejorar su presencia online.</p>
+			<a class="btn-primary inline-block mb-16 bg-primary text-white hover:text-secondary p-6" href="/blog/">Artículos y tutoriales</a>
+			<h3>Si no tienes tiempo o necesitas un profesional también puedo ayudarte</h3>
+			<p>Mi enfoque está en crear soluciones web personalizadas y altamente eficientes, adaptadas a las necesidades de autónomos, pequeñas empresas y particulares que buscan iniciar o mejorar su presencia online.</p>
+			<a class="btn-primary inline-block mb-16 bg-primary text-white hover:text-secondary p-6">Solicita una consulta gratuita.</a>
+		</div>
+		<?php
 	}	
 	?>
 	<div class="block my-8 md:container">
