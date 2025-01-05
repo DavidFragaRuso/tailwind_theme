@@ -439,7 +439,8 @@
         //Create array with html markup for print data
         $rrss_list = '';
         if( $isHeader ) {
-            $rrss_list .= '<ul class="social-links-head mb-0 float-right">';  
+            $rrss_list .= '<span class="text-white block max-w-64 mb-2 md:mb-0">Sígueme en redes sociales:</span>';
+            $rrss_list .= '<ul class="social-links-head mb-0 float-right">';
         } else {
             $rrss_list .= '<ul class="social-links">';
         }
@@ -458,13 +459,6 @@
     }
 
     public function tailtheme_cd_option_css(){
-        /*
-        $text_color = get_theme_mod('text-color-callout-display', '#000000');
-        $main_color = get_theme_mod('color-callout-display', '#000000');
-        $hover_color = get_theme_mod('hcolor-callout-display', '#464646');
-        $size_icon = get_theme_mod('size-callout-display', '30');
-        $margin_icon = get_theme_mod( 'margin-callout-display', '15' );
-        */
         ?>
         <style>
             :root {
