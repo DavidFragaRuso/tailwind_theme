@@ -351,7 +351,7 @@
         )));
     }
 
-    function tailtheme_render_rrss_links() {
+    function tailtheme_render_rrss_links($isHeader = false) {
         //Email
         $email = array(
             'name' => 'E-mail',
@@ -434,9 +434,15 @@
         $rrss = [];
         array_push($rrss, $email, $facebook, $instagram, $twitter, $github, $tumblr, $linkedin, $pinterest, $youtube, $tiktok, $telegram, $strava, $whatsapp);
 
+
+
         //Create array with html markup for print data
         $rrss_list = '';
-        $rrss_list .= '<ul class="social-links">';
+        if( $isHeader ) {
+            $rrss_list .= '<ul class="social-links-head mb-0 float-right">';  
+        } else {
+            $rrss_list .= '<ul class="social-links">';
+        }
         foreach ($rrss as $rrss_link) {
             if(isset($rrss_link['link'])& $rrss_link['link'] != false ){
                 if( $rrss_link['name'] == 'E-mail' ) {
@@ -467,7 +473,7 @@
             }
         </style>
         <style type="text/css" id="tailteheme-social-css">
-            ul.social-links{
+            ul.social-links, ul.social-links-head{
                 display: flex;
                 flex-wrap: nowrap;
                 list-style: none;
@@ -476,9 +482,19 @@
             ul.social-links li{
                 margin-right: <?php echo get_theme_mod( 'margin-callout-display', '15' ); ?>px;
             }
+            ul.social-links-head li{
+                margin-right: 15px;
+            }
             ul.social-links li a svg{
-                width: <?php echo get_theme_mod('size-callout-display', '30'); ?>px;
-                height: <?php echo get_theme_mod('size-callout-display', '30'); ?>px;
+                width: 30px;
+                height: 30px;
+            }
+            ul.social-links-head li a svg{
+                width: 30px;
+                height: 30px;
+            }
+            ul.social-links-head li{
+                margin-right: 10px;
             }
             ul.social-links li a svg path, 
             ul.social-links li a svg circle, 

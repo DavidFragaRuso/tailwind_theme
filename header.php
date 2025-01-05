@@ -9,6 +9,8 @@
  * @package tailwind_theme
  */
 
+global $theme_customizer;
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -25,8 +27,8 @@
 <div id="page" class="site">
 <header id="masthead" class="site-header bg-white absolute top-0 right-0 left-0 z-40 shadow-md">
 	<div class="extra-head bg-secondary flex">
-		<div class="container px-2">
-			<span class="float-end text-primary font-bold">Test</span>
+		<div class="container py-2">
+			<?php $theme_customizer->tailtheme_render_rrss_links('true'); ?>
 		</div>
 	</div>
 	<div class="container">

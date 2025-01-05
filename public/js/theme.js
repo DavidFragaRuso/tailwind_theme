@@ -1,1 +1,228 @@
-(()=>{var e,n={615:()=>{var e;(e=jQuery)(document).ready((function(){window.onresize=function(){t&&(t=n.clientHeight),r.style.paddingTop=o+"px",i.style.marginTop=t+"px"},window.onscroll=function(){pageScroll=window.scrollY,i.classList.toggle("has-fixed",pageScroll>140)};var n=document.getElementById("wpadminbar");if(n)var t=n.clientHeight;var r=document.getElementById("primary"),i=document.getElementById("masthead");if(i)var o=i.clientHeight;r.style.paddingTop=o+"px",n&&(i.style.marginTop=t+"px"),document.getElementById("toggle-btn").addEventListener("click",(function(e){e.preventDefault(),document.getElementById("main-menu").classList.toggle("show-element")}),!1),e(".menu-item-has-children").length&&e(".menu-item-has-children").on("click",(function(){e(".sub-menu").toggleClass("show-element")}))}))},404:()=>{}},t={};function r(e){var i=t[e];if(void 0!==i)return i.exports;var o=t[e]={exports:{}};return n[e](o,o.exports,r),o.exports}r.m=n,e=[],r.O=(n,t,i,o)=>{if(!t){var l=1/0;for(d=0;d<e.length;d++){for(var[t,i,o]=e[d],a=!0,s=0;s<t.length;s++)(!1&o||l>=o)&&Object.keys(r.O).every((e=>r.O[e](t[s])))?t.splice(s--,1):(a=!1,o<l&&(l=o));if(a){e.splice(d--,1);var c=i();void 0!==c&&(n=c)}}return n}o=o||0;for(var d=e.length;d>0&&e[d-1][2]>o;d--)e[d]=e[d-1];e[d]=[t,i,o]},r.o=(e,n)=>Object.prototype.hasOwnProperty.call(e,n),(()=>{var e={879:0,314:0};r.O.j=n=>0===e[n];var n=(n,t)=>{var i,o,[l,a,s]=t,c=0;if(l.some((n=>0!==e[n]))){for(i in a)r.o(a,i)&&(r.m[i]=a[i]);if(s)var d=s(r)}for(n&&n(t);c<l.length;c++)o=l[c],r.o(e,o)&&e[o]&&e[o][0](),e[o]=0;return r.O(d)},t=self.webpackChunktailwind_theme=self.webpackChunktailwind_theme||[];t.forEach(n.bind(null,0)),t.push=n.bind(null,t.push.bind(t))})(),r.O(void 0,[314],(()=>r(615)));var i=r.O(void 0,[314],(()=>r(404)));i=r.O(i)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/js/theme.js":
+/*!*************************!*\
+  !*** ./src/js/theme.js ***!
+  \*************************/
+/***/ (() => {
+
+//Jquery no-conflict mode
+(function ($) {
+  $(document).ready(function () {
+    //Events tigger
+    window.onresize = setNavOnLoad;
+    window.onscroll = showFixedNavbar;
+
+    /**
+     * Set primary padding height nav based
+     */
+    var adminBar = document.getElementById('wpadminbar');
+    if (adminBar) {
+      var adminBarHeight = adminBar.clientHeight;
+    }
+    var wpBody = document.getElementById('primary');
+    var navBar = document.getElementById('masthead');
+    if (navBar) {
+      var navBarHeight = navBar.clientHeight;
+    }
+    wpBody.style.paddingTop = navBarHeight + 'px';
+    if (adminBar) {
+      navBar.style.marginTop = adminBarHeight + 'px';
+    }
+
+    //Recalculate on window resize
+    function setNavOnLoad() {
+      if (adminBarHeight) {
+        adminBarHeight = adminBar.clientHeight;
+      }
+      wpBody.style.paddingTop = navBarHeight + 'px';
+      navBar.style.marginTop = adminBarHeight + 'px';
+    }
+
+    /**
+     * Fix navbar on scroll
+     */
+    function showFixedNavbar() {
+      pageScroll = window.scrollY;
+      //console.log(pageScroll);
+      navBar.classList.toggle('has-fixed', pageScroll > 140);
+    }
+
+    /**
+     * Menu open button
+     */
+    var toggleButton = document.getElementById("toggle-btn");
+    toggleButton.addEventListener("click", changeVisiblility, false);
+    function changeVisiblility(e) {
+      e.preventDefault();
+      document.getElementById("main-menu").classList.toggle('show-element');
+    }
+
+    //Open Submenus function
+    if ($(".menu-item-has-children").length) {
+      $(".menu-item-has-children").on("click", function () {
+        $(".sub-menu").toggleClass("show-element");
+      });
+    }
+  });
+})(jQuery);
+
+/***/ }),
+
+/***/ "./src/css/theme.sass":
+/*!****************************!*\
+  !*** ./src/css/theme.sass ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"/public/js/theme": 0,
+/******/ 			"style": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunktailwind_theme"] = self["webpackChunktailwind_theme"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	__webpack_require__.O(undefined, ["style"], () => (__webpack_require__("./src/js/theme.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["style"], () => (__webpack_require__("./src/css/theme.sass")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
+/******/ })()
+;
