@@ -27,7 +27,7 @@ global $theme_customizer;
 <div id="page" class="site">
 <header id="masthead" class="site-header bg-white absolute top-0 right-0 left-0 z-40 shadow-md">
 	<div class="extra-head bg-secondary flex">
-		<div class="container pt-2 md:pt-4 pb-4">
+		<div class="container pt-4 pb-4">
 			<?php $theme_customizer->tailtheme_render_rrss_links('true'); ?>
 		</div>
 	</div>

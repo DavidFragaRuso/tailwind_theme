@@ -439,8 +439,8 @@
         //Create array with html markup for print data
         $rrss_list = '';
         if( $isHeader ) {
-            $rrss_list .= '<span class="text-white block max-w-64 mb-2 md:mb-0">Sígueme en redes sociales:</span>';
             $rrss_list .= '<ul class="social-links-head mb-0 float-right">';
+            $rrss_list .= '<li><span class="text-white">' . __('Follow Me: ', 'tailtheme') . '</span></li>';
         } else {
             $rrss_list .= '<ul class="social-links">';
         }
@@ -475,9 +475,6 @@
             }
             ul.social-links li{
                 margin-right: <?php echo get_theme_mod( 'margin-callout-display', '15' ); ?>px;
-            }
-            ul.social-links-head li{
-                margin-right: 15px;
             }
             ul.social-links li a svg{
                 width: 30px;
